@@ -21,3 +21,17 @@ Chod cez konzolu do adresara s projektom a spusti <b>code .</b><br>
 Mozes upravovat a zmeny sa automaticky presiria do dockeru :)))
 </p>
 
+<br>
+
+<h4>cely setup podla <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-laravel-with-docker-compose-on-ubuntu-20-04">tutorialu</a></h4>
+<p>
+<ul>
+<li>Exec on running container: docker-compose exec testapp-app ls -l</li>
+</ul>
+</p>
+
+<!-- DO Only once after init to init laravel -->
+<!-- composer create-project --prefer-dist laravel/laravel:^8.0 final -->
+<!-- cd final -->
+<!-- mv * ../ -->
+

@@ -29,7 +29,7 @@ services:
             - 8000:80
         volumes:
             - ./:/var/www
-            - ./config/nginx:/etc/nginx/conf.d
+            - ./docker-compose/nginx:/etc/nginx/conf.d
         networks:
             - appnet
 
@@ -45,7 +45,7 @@ services:
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
         volumes:
-            - ./config/mysql:/docker-entrypoint-initdb.d
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
         networks:
             - appnet
 
