@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+    app:
+# we will build from local dockerfile instead of image from repo
+        build:
+            args:
+                user: dev_user
+                uid: 1000
+            context: ./docker
+            dockerfile: php.Dockerfile
+        image: ${APP_NAME}
+        container_name: ${APP_NAME}-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - mariadb
+        networks:
+            - appnet
+
+
+    nginx:
+        image: nginx:latest
+        container_name: ${APP_NAME}-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./config/nginx:/etc/nginx/conf.d
+        networks:
+            - appnet
+
+    mariadb:
+        image: mariadb:10.3.9
+        container_name: ${APP_NAME}-mariadb
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./config/mysql:/docker-entrypoint-initdb.d
+        networks:
+            - appnet
+
+networks:
+    appnet:
+        driver: bridge
