@@ -10,6 +10,8 @@
 </li>stiahni si repo<li>
 </li>presun sa do zlozky, kde mas projekt cez <b>cd ./x./y/projekt </b><li>
 </li>v console spusti <b>docker-compose up</b> a bezi ti mariadb aj appka<li>
+<li>este treba dotiahnut dependecies, ktore nedavame do gitu <b>docker-compose exec testapp composer install</b></li>
+<li> a <b>docker-compose exec testapp php artisan key:generate</b></li>
 </li>Spusti si appku v prehliadaci vo windowse <a href="http://localhost:8000/">huraaa web</a><li>
 </ul>
 </p>
