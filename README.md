@@ -1,4 +1,4 @@
-# test-your-self
+# Semestralne zadanie WebTech2
 
 <h3>Docker & docker-compose configuration: nginx, php8 and MySQL</h3>
 
@@ -11,8 +11,8 @@
     <li>stiahni si repo</li>
     <li>presun sa v konzole do zlozky, kde mas git projekt cez <b>cd ./x/y/projekt </b></li>
     <li>v console spusti <b>docker-compose up</b> a bezi ti mysql aj appka</li>
-    <li>este treba dotiahnut dependecies, ktore nedavame do gitu <b>docker exec final-app composer install</b></li>
-    <li> a <b>docker exec final-app php artisan key:generate</b></li>
+    <li>este treba dotiahnut dependecies, ktore nedavame do gitu <b>docker exec exam-app composer install</b></li>
+    <li> a <b>docker exec exam-app php artisan key:generate</b></li>
     <li>Spusti si appku v prehliadaci vo windowse <a href="http://localhost:8000/">huraaa web</a></li>
 </ul>
 
@@ -28,7 +28,7 @@ Mozes upravovat a zmeny sa automaticky presiria do dockeru :)))
 <h4>cely setup podla <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-laravel-with-docker-compose-on-ubuntu-20-04">tutorialu</a></h4>
 <p>
 <ul>
-<li>Exec on running container: docker-compose exec final-app ls -l</li>
+<li>Exec on running container: docker exec exam-app ls -l</li>
 </ul>
 </p>
 
