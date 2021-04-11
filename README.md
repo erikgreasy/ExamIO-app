@@ -10,10 +10,10 @@
     <li>Prejdi do nejakej zlozky, kde chces projektik</li>
     <li>stiahni si repo</li>
     <li>presun sa v konzole do zlozky, kde mas git projekt cez <b>cd ./x/y/projekt </b></li>
-    <li>v console spusti <b>docker-compose up</b> a bezi ti mysql aj appka</li>
-    <li>este treba dotiahnut dependecies, ktore nedavame do gitu <b>docker exec exam-app composer install</b></li>
-    <li> spusti: <b>docker exec exam-app php artisan key:generate</b></li>
-    <li> spusti migraciu db: <b>docker exec exam-app php artisan migrate</b></li>
+    <li>v console spusti <b>docker-compose up</b> a bezi ti mysql aj appka -> v tomto terminale</li>
+    <li>este treba dotiahnut dependecies, ktore nedavame do gitu (v novom terminale, tiez vo wsl a v tej istej zloke) <b>docker exec exam-app composer install</b></li>
+    <li>Spusti: <b>docker exec exam-app php artisan key:generate</b></li>
+    <li>Spusti migraciu db: <b>docker exec exam-app php artisan migrate</b></li>
     <li>Spusti si appku v prehliadaci vo windowse <a href="http://localhost:8000/">huraaa web</a></li>
 </ul>
 
