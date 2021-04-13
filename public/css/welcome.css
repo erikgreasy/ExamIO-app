@@ -1,0 +1,68 @@
+html, body {
+    font-family: 'Nunito', sans-serif;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#welcome_section{
+    margin: 0px;
+    padding: 0px;
+    /* height: 60%; */
+
+    background: rgb(36,37,130);
+    background: linear-gradient(209deg, rgba(36,37,130,1) 19%, rgba(47,47,162,1) 94%);
+}
+
+#welcome_join_col{
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
+#welcome_join{
+    padding: 5% 5% 5% 10%;
+    color: #F64C72;
+    /* background-color: azure; */
+    margin: auto;   
+}
+
+#welcome_join_form{
+    width: 62%;
+}
+
+#welcome_join_input{
+    margin-top: 2%;
+    color: #F64C72;
+    background: rgb(36,37,130);
+    background: linear-gradient(209deg, rgba(36,37,130,1) 19%, rgba(47,47,162,1) 94%);
+    border-radius: 0;    
+    border: 2px solid whitesmoke;
+}
+
+#welcome_join_button{
+    background-color: #F64C72;
+    color: whitesmoke;
+    /* font-size: 2rem; */
+    border-radius: 0      10px      10px          0;
+            /* top-left top-right bottom-right bottom-left.  */
+    border: 2px solid whitesmoke;
+}
+
+#welcome_join .display-3{
+    font-family: 'Raleway',sans-serif;
+    color: whitesmoke;
+    font-size: 3vw;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#welcome_join .display-4{
+    font-size: large;
+}
+
+#exam_img{
+    height: auto;
+    width: 100%;
+    bottom: 0;
+}
+
