@@ -36,7 +36,7 @@
             <div id="welcome_join_col" class="col-md-12 col-lg-6 m-0 w-100 justify-content-center align-self-center">
                 <div id="welcome_join">
                     <h1 class="display-3">Pripojte sa k testu</h1><br>
-                    <!-- <span class="display-4">Veľmi jednoducho</span><br> -->
+                    <span class="display-4 my-3 mx-1">Stačí zadať kód, ktorý vám poslal váš učiteľ. Je to jednoduché!</span><br>
 
                     <!-- <input type="text"> -->
                     <div id="welcome_join_form" class="input-group mb-3">

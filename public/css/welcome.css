@@ -28,6 +28,7 @@ html, body {
 
 #welcome_join_form{
     width: 62%;
+    margin-top: 3%;
 }
 
 #welcome_join_input{
@@ -58,6 +59,9 @@ html, body {
 
 #welcome_join .display-4{
     font-size: large;
+    color: whitesmoke;
+    font-size: medium;
+    font-weight:lighter;
 }
 
 #exam_img{
