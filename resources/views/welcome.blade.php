@@ -19,7 +19,7 @@
   
     <div class="bg-indigo-900 relative overflow-hidden">
         <div class="inset-0 bg-black opacity-25 absolute"></div>
-        
+
         <header class="absolute top-0 left-0 right-0 z-20">
             <nav class="container mx-auto px-6 md:px-12 py-4" x-data="{ open: false }">
                 <div class="md:flex justify-between items-center">
@@ -39,16 +39,16 @@
                     </div>
 
                     <div class="hidden md:flex items-center">
-                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">About us</a>
-                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Calendar</a>
-                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Contact us</a>
+                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Prihlásenie</a>
+                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Moje testy</a>
+                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">O nás</a>
                     </div>
                 </div>
 
                 <div x-show="open === true" class="md:hidden flex flex-col w-full z-40 bg-indigo-600 rounded mt-4 py-2 overflow-hidden">
-                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">About us</a>
-                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">Calendar</a>
-                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">Contact us</a>
+                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">Prihlásenie</a>
+                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">Moje testy</a>
+                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">O nás</a>
                 </div>
             </nav>
             <!-- <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -68,7 +68,7 @@
             </div> -->
         </header>
 
-        <div class="container mx-auto px-6 md:px-12 relative z-10 flex flex-wrap items-center py-24 xl:py-40">
+        <div class="container mx-auto px-6 md:px-12 relative z-10 flex justify-center  flex-wrap items-center py-24 xl:py-40">
             <div class="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
                 <span class="font-mitr uppercase text-indigo-500">- - -</span>
 
@@ -79,7 +79,7 @@
                 </div>
 
                 <form class="xl:mt-4 mt-8 flex hidden xl:flex">
-                    <input class="rounded-l-full p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="#A72BB"/>
+                    <input class="p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="#A72BB"/>
                     <button class="px-8 rounded-r-full bg-custom-pink  hover:bg-pink-700 text-white font-bold p-4 uppercase border-t border-b border-r">Pripojte ma</button>
                 </form>
             </div>
@@ -93,6 +93,88 @@
         </div>
     </div>
 
+
+<!-- steps to ...-->
+    <section class="container mx-auto px-6 pt-8 sm:pt-16 pb-20">
+
+        <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight text-custom-blue_dark my-4 text-center uppercase">Pre skúšajúcich</h1>
+
+        <div class="flex flex-col sm:flex-row w-full mb-16 sm:mb-32">
+            <div class="relative sm:w-1/3">
+                <span class="text-6xl font-black text-gray-200 absolute top-0 left-0">1</span>
+                <div class="mt-8 ml-6 relative z-10 flex flex-col">
+                    <h4 class="font-bold text-gray-400 uppercase font-xs leading-none">Začíname</h4>
+                    <p class="text-3xl text-gray-800 leading-none mt-2">Zaregistrujte sa</p>
+                    <!-- <a href="#" class="text-blue-500 mt-2">Zobraziť viac</a> -->
+                </div>
+            </div>
+            <div class="relative sm:w-1/3">
+                <span class="text-6xl font-black text-gray-200 absolute top-0 left-0">2</span>
+                <div class="mt-8 ml-6 relative z-10 flex flex-col">
+                    <h4 class="font-bold text-gray-400 uppercase font-xs leading-none">Začíname</h4>
+                    <p class="text-3xl text-gray-800 leading-none mt-2">Vytvorte nový test</p>
+                    <!-- <a href="#" class="text-blue-500 mt-2">Zobraziť viac</a> -->
+                </div>
+            </div>
+            <div class="relative sm:w-1/3">
+                <span class="text-6xl font-black text-gray-200 absolute top-0 left-0">3</span>
+                <div class="mt-8 ml-6 relative z-10 flex flex-col">
+                    <h4 class="font-bold text-gray-400 uppercase font-xs leading-none">Začíname</h4>
+                    <p class="text-3xl text-gray-800 leading-none mt-2">Zadefinujte otázky</p>
+                    <!-- <a href="#" class="text-blue-500 mt-2">Zobraziť viac</a> -->
+                </div>
+            </div>
+        </div>
+        <div class="sm:px-12 flex flex-col sm:flex-row">
+            <div class="sm:w-1/2 sm:pr-16">
+                <img src="{{ asset('img/exam_time.jpg') }}" class="rounded-lg">
+            </div>
+            <div class="sm:w-1/2 pt-4">
+                <h3 class="text-2xl text-gray-800 mb-4">
+                    5 typov otázok, možnosť automatickej opravy.
+                </h3>
+                <p class="text-gray-600 leading-relaxed text-lg mb-4">
+                    Pre každý test je možné zadefinovať niekoľko typov otázok, niektoré s možnosťou automatickej opravy.
+                    Vytvorte otázky s možnosťami, spájanie správnych odpovedí, písanie vzorcov a ďalšie.
+                </p>
+                <button class="mx-auto bg-blue-600 hover:bg-blue-500 text-white rounded py-2 px-8 shadow-lg">
+                    Zobraziť viac..
+                </button>
+            </div>
+        </div>
+    </section>
+
+<!-- Stay updated -->
+    <div class="min-w-screen py-25 bg-gray-50 flex items-center justify-center py-2">
+        <div class="w-full bg-white border-t border-b border-gray-200 px-5 py-16 md:py-24 text-gray-800 font-light">
+            <div class="w-full max-w-6xl mx-auto pb-5">
+                <div class="-mx-3 md:flex items-center">
+                    <div class="px-3 md:w-2/3 mb-10 md:mb-0">
+                        <h1 class="text-6xl md:text-8xl font-bold mb-5 leading-tight">Zostaňte <br class="hidden md:block">informovaní.</h1>
+                        <h3 class="text-gray-600 mb-7 leading-tight">Zadajte svoj email a zostaňte informovaní.</h3>
+                        <div>
+                            <span class="inline-block w-40 h-1 rounded-full bg-indigo-500"></span>
+                            <span class="inline-block w-3 h-1 rounded-full bg-indigo-500 ml-1"></span>
+                            <span class="inline-block w-1 h-1 rounded-full bg-indigo-500 ml-1"></span>
+                        </div>
+                    </div>
+                    <div class="px-3 md:w-1/3">
+                        <form>
+                            <div class="flex mb-3">
+                                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
+                                <input type="email" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="email@example.com">
+                            </div>
+                            <div>
+                                <button class="block w-full bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 transition-colors text-white rounded-lg px-3 py-2 font-semibold">Odoberať.</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <a href='https://www.freepik.com/vectors/education'>Education vector created by stories - www.freepik.com</a> -->
     <script src="https://premium-tailwindcomponents.netlify.app/assets/build/js/main.js?id=8c11b7cf78ebea1b5aed"></script>
 </body>
 </html>
