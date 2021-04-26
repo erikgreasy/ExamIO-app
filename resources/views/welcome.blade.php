@@ -39,33 +39,36 @@
                     </div>
 
                     <div class="hidden md:flex items-center">
-                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Prihlásenie</a>
-                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Moje testy</a>
-                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">O nás</a>
+                        @if (Route::has('login'))
+                                @auth
+                                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+                                @else
+                                    <a href="{{ route('login') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Prihlásenie</a>
+
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Registrácia</a>
+                                    @endif
+                                @endauth
+                        @endif
+                        <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Kontakt</a>
                     </div>
                 </div>
 
                 <div x-show="open === true" class="md:hidden flex flex-col w-full z-40 bg-indigo-600 rounded mt-4 py-2 overflow-hidden">
-                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">Prihlásenie</a>
-                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">Moje testy</a>
-                    <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">O nás</a>
+                    @if (Route::has('login'))
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Prihlásenie</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Registrácias</a>
+                                @endif
+                            @endauth
+                    @endif
+                    <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Kontakt</a>
                 </div>
             </nav>
-            <!-- <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-                @if (Route::has('login'))
-                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                            @endif
-                        @endauth
-                    </div>
-                @endif
-            </div> -->
         </header>
 
         <div class="container mx-auto px-6 md:px-12 relative z-10 flex justify-center  flex-wrap items-center py-24 xl:py-40">
@@ -95,7 +98,7 @@
 
 
 <!-- steps to ...-->
-    <section class="container mx-auto px-6 pt-8 sm:pt-16 pb-20">
+    <section class="max-w-7xl container mx-auto px-6 pt-8 sm:pt-16 pb-20">
 
         <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight text-custom-blue_dark my-4 text-center uppercase">Pre skúšajúcich</h1>
 
@@ -104,7 +107,7 @@
                 <span class="text-6xl font-black text-gray-200 absolute top-0 left-0">1</span>
                 <div class="mt-8 ml-6 relative z-10 flex flex-col">
                     <h4 class="font-bold text-gray-400 uppercase font-xs leading-none">Začíname</h4>
-                    <p class="text-3xl text-gray-800 leading-none mt-2">Zaregistrujte sa</p>
+                    <p class="text-3xl text-gray-800 leading-none mt-2">Vytvorte nový test.</p>
                     <!-- <a href="#" class="text-blue-500 mt-2">Zobraziť viac</a> -->
                 </div>
             </div>
@@ -112,7 +115,7 @@
                 <span class="text-6xl font-black text-gray-200 absolute top-0 left-0">2</span>
                 <div class="mt-8 ml-6 relative z-10 flex flex-col">
                     <h4 class="font-bold text-gray-400 uppercase font-xs leading-none">Začíname</h4>
-                    <p class="text-3xl text-gray-800 leading-none mt-2">Vytvorte nový test</p>
+                    <p class="text-3xl text-gray-800 leading-none mt-2">Zadefinujte otázky.</p>
                     <!-- <a href="#" class="text-blue-500 mt-2">Zobraziť viac</a> -->
                 </div>
             </div>
@@ -120,7 +123,7 @@
                 <span class="text-6xl font-black text-gray-200 absolute top-0 left-0">3</span>
                 <div class="mt-8 ml-6 relative z-10 flex flex-col">
                     <h4 class="font-bold text-gray-400 uppercase font-xs leading-none">Začíname</h4>
-                    <p class="text-3xl text-gray-800 leading-none mt-2">Zadefinujte otázky</p>
+                    <p class="text-3xl text-gray-800 leading-none mt-2">Odošlite žiakom kód testu.</p>
                     <!-- <a href="#" class="text-blue-500 mt-2">Zobraziť viac</a> -->
                 </div>
             </div>
@@ -142,38 +145,122 @@
                 </button>
             </div>
         </div>
-    </section>
+    </section><hr class="max-w-7xl mx-auto">
+
 
 <!-- Stay updated -->
-    <div class="min-w-screen py-25 bg-gray-50 flex items-center justify-center py-2">
-        <div class="w-full bg-white border-t border-b border-gray-200 px-5 py-16 md:py-24 text-gray-800 font-light">
-            <div class="w-full max-w-6xl mx-auto pb-5">
-                <div class="-mx-3 md:flex items-center">
-                    <div class="px-3 md:w-2/3 mb-10 md:mb-0">
-                        <h1 class="text-6xl md:text-8xl font-bold mb-5 leading-tight">Zostaňte <br class="hidden md:block">informovaní.</h1>
-                        <h3 class="text-gray-600 mb-7 leading-tight">Zadajte svoj email a zostaňte informovaní.</h3>
-                        <div>
-                            <span class="inline-block w-40 h-1 rounded-full bg-indigo-500"></span>
-                            <span class="inline-block w-3 h-1 rounded-full bg-indigo-500 ml-1"></span>
-                            <span class="inline-block w-1 h-1 rounded-full bg-indigo-500 ml-1"></span>
-                        </div>
-                    </div>
-                    <div class="px-3 md:w-1/3">
-                        <form>
-                            <div class="flex mb-3">
-                                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
-                                <input type="email" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="email@example.com">
-                            </div>
-                            <div>
-                                <button class="block w-full bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 transition-colors text-white rounded-lg px-3 py-2 font-semibold">Odoberať.</button>
-                            </div>
-                        </form>
-                    </div>
+    <section class="py-10 px-6">
+        <div class="max-w-7xl px-6 py-16 mx-auto">
+            <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight text-custom-blue_dark my-4 text-center uppercase">
+            až 5 typov otázok</h1>
+    
+            <div class="grid gap-8 mt-10 md:grid-cols-3 lg:grid-cols-5">
+                <div class="px-6 py-8 overflow-hidden bg-white rounded-md shadow-md">
+                    <h2 class="text-xl font-medium text-gray-800">Textová odpoveď</h2>
+                    <p class="max-w-md mt-4 text-gray-400">Klasická textová odpoveď na otázku, s možnosťou automatickej opravy.</p>
+                </div>
+    
+                <div class="px-6 py-8 overflow-hidden bg-white rounded-md shadow-md">
+                    <h2 class="text-xl font-medium text-gray-800">Výber z možností</h2>
+                    <p class="max-w-md mt-4 text-gray-400">Žiakovi sú zobrazené dopredu zadefinované možnosti a musí vybrať tú správnu.</p>
+                </div>
+    
+                <div class="px-6 py-8 overflow-hidden bg-white rounded-md shadow-md">
+                    <h2 class="text-xl font-medium text-gray-800">Spájanie možností</h2>
+                    <p class="max-w-md mt-4 text-gray-400">Úloha žiaka je pospájať objekty, rozdelené do dvoch skupín.</p>
+                </div>
+                <div class="px-6 py-8 overflow-hidden bg-white rounded-md shadow-md">
+                    <h2 class="text-xl font-medium text-gray-800">Odpoveď obrázkom</h2>
+                    <p class="max-w-md mt-4 text-gray-400">Ako odpoveď je možné nahrať obrázok, či už priamo alebo pomocou QR kódu.</p>
+                </div>
+                <div class="px-6 py-8 overflow-hidden bg-white rounded-md shadow-md">
+                    <h2 class="text-xl font-medium text-gray-800">Odpoveď vzorcom</h2>
+                    <p class="max-w-md mt-4 text-gray-400">Odpoveď je nutné zapísať v matematickom tvare pomocou nástroja na vzorce. </p>
                 </div>
             </div>
         </div>
-    </div>
+    </section><hr class="max-w-7xl mx-auto">
 
+    
+<!-- Its for free! -->
+    <section class="bg-white py-10 px-6">
+        <div class="max-w-7xl py-10 mx-auto">
+            <div class="py-12 bg-gray-800 rounded-md md:px-20 md:flex md:items-center md:justify-between">
+                <div>
+                    <h3 class="text-2xl font-semibold text-white">Naše služby sú úplne zadarmo!</h3>
+                    <p class="max-w-md mt-4 text-gray-400">Poskytnuté služby pre pomoc pri vzdelávaní a hodnotení študentov 
+                    sú úplne zdarma, no môžte nás podporiť a tým urýchliť vývoj.</p>
+                </div>
+    
+                <a class="block px-8 py-2 mt-6 text-lg font-medium text-center text-white transition-colors duration-300 transform bg-indigo-600 rounded md:mt-0 hover:bg-indigo-500" href="#">Podporiť</a>
+            </div>
+        </div>
+    </section><hr class="max-w-7xl mx-auto">
+
+
+<!-- Made by :)) -->
+    <section class="bg-gray-100 py-10 px-6">
+        <div class="max-w-7xl px-6 py-16 mx-auto text-center">
+            <h2 class="text-3xl font-semibold text-gray-800">Náš tím</h2>
+            <p class="max-w-lg mx-auto mt-4 text-gray-600">Tento projekt Vám prináša partia mladých ľudí, ktorí milujú fancy znejúce skratky,
+            no ešte viac technológie a preto tvorbu tejto webovej aplikácie prijali ako skvelú výzvu vstúpiť do neznámych vôd Laravelu a Dockeru. 
+            </p>
+    
+            <div class="grid gap-8 mt-6 md:grid-cols-2 lg:grid-cols-5">
+                <div>
+                    <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/lukas.jpg') }}">
+                    <h3 class="mt-2 font-medium text-gray-700">Lukáš Krivosudský</h3>
+                    <p class="text-sm text-gray-600">Chief Executive Officer (CEO)</p>
+                </div>
+    
+                <div>
+                    <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/roman.jpg') }}">
+                    <h3 class="mt-2 font-medium text-gray-700">Roman Bútora</h3>
+                    <p class="text-sm text-gray-600">Chief Operating Officer (COO)</p>
+                </div>
+    
+                <div>
+                    <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/marek.jpg') }}">
+                    <h3 class="mt-2 font-medium text-gray-700">Marek Lunter</h3>
+                    <p class="text-sm text-gray-600">Chief IT Security Officer (CISO)</p>
+                </div>
+    
+                <div>
+                    <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/erik.jpg') }}">
+                    <h3 class="mt-2 font-medium text-gray-700">Erik Masný</h3>
+                    <p class="text-sm text-gray-600">Chief Technology Officer (CTO)</p>
+                </div>
+
+                <div>
+                    <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/rasto.jpg') }}">
+                    <h3 class="mt-2 font-medium text-gray-700">Rastislav Kopál</h3>
+                    <p class="text-sm text-gray-600">Chief Information Officer (CIO)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 pt-16">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col sm:flex-row items-center justify-end">
+                <div class="sm:w-2/3">
+                    <h4 class="text-3xl text-white leading-tight text-center sm:text-left">Webová aplikácia exam.io <br class="hidden sm:block"> Projekt pre predmet <span class="font-bold underline">Webové technológie 2</span></h4>
+                </div>
+                <div class="sm:w-1/3 mt-12 sm:mt-0 flex justify-end">
+                    <button class="bg-blue-600 hover:bg-blue-500 text-white rounded py-3 px-8 shadow-lg text-xl">Kontaktuje nás</button>
+                </div>
+            </div>
+            <div class="flex justify-center sm:justify-end border-t border-gray-700 py-10 mt-16">
+                <a href="#" class="text-white mx-2">Domov</a>
+                <a href="#" class="text-white mx-2">Prihlásenie</a>
+                <a href="#" class="text-white mx-2">Registrácia</a>
+                <a href="#" class="text-white mx-2">Moje testy</a>
+                <a href="#" class="text-white mx-2">Zdroje</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <a href='https://www.freepik.com/vectors/banner'>Banner vector created by upklyak - www.freepik.com</a> -->
     <!-- <a href='https://www.freepik.com/vectors/education'>Education vector created by stories - www.freepik.com</a> -->
     <script src="https://premium-tailwindcomponents.netlify.app/assets/build/js/main.js?id=8c11b7cf78ebea1b5aed"></script>
 </body>
