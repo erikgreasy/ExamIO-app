@@ -2,6 +2,6 @@
 
 @section('content')
 
-tuna je obsah
+ main obsah - exams>index.blade.php -> uvodna stranka pre exams- vypisanie vsetkych exams prhlaseneu userovi
 
 @endsection
