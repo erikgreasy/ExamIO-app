@@ -19,7 +19,7 @@
             <div class="hidden md:flex items-center">
                 @if (Route::has('login'))
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+                            <a href="{{ url('/dashboard') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600 underline">Dashboard</a>
                         @else
                             <a href="{{ route('login') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Prihlásenie</a>
 
@@ -35,7 +35,7 @@
         <div x-show="open === true" class="md:hidden flex flex-col w-full z-40 bg-indigo-600 rounded mt-4 py-2 overflow-hidden">
             @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+                        <a href="{{ url('/dashboard') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600 underline">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Prihlásenie</a>
 
