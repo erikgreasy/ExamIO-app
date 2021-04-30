@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -42,7 +43,7 @@ class ExamController extends Controller
             'exam_description' => 'required|max:255',
         ]);
         
-        Exam::create([
+        $exam = Exam::create([
             'exam_code' => Str::random(5),
             'user_id' => 1,                     // TODO ADDED user_id who is logged in !!
             'time_limit' => $request->time_limit,
@@ -51,7 +52,7 @@ class ExamController extends Controller
             'description' => $request->exam_description,
         ]);
 
-        dd("successfully created");
+        return $this->show($exam);
     }
 
     /**
@@ -62,7 +63,14 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
-        return Exam::findOrFail($exam->id);
+        $questions = Question::where('exam_id', $exam->id);
+
+        return view('exams.show')
+                    ->with('exam_title', $exam->title)
+                    ->with('time_limit', $exam->time_limit)
+                    ->with('exam_description', $exam->description)
+                    ->with('exam_code', $exam->exam_code)
+                    ->with('questions', $questions);
     }
 
     /**
