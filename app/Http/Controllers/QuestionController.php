@@ -14,7 +14,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return Question::all();
     }
 
     /**
@@ -24,7 +24,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('questions.create');
     }
 
     /**

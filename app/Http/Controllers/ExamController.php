@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ExamController extends Controller
 {
@@ -24,7 +25,7 @@ class ExamController extends Controller
      */
     public function create()
     {
-        //
+        return view('exams.create');
     }
 
     /**
@@ -35,7 +36,22 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'exam_title' => 'required|max:50',
+            'time_limit' => 'required',
+            'exam_description' => 'required|max:255',
+        ]);
+        
+        Exam::create([
+            'exam_code' => Str::random(5),
+            'user_id' => 1,                     // TODO ADDED user_id who is logged in !!
+            'time_limit' => $request->time_limit,
+            'active' => true,
+            'title' => $request->exam_title,
+            'description' => $request->exam_description,
+        ]);
+
+        dd("successfully created");
     }
 
     /**

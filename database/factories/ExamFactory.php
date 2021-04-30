@@ -26,6 +26,8 @@ class ExamFactory extends Factory
         return [
             'exam_code'     => Str::random(5),
             'user_id'       => User::all()->random(1)->first()->id,
+            'title'         => $this->faker->company(mt_rand(10, 50)),
+            'description'   => $this->faker->text(mt_rand(50, 255)),
             'time_limit'    => $this->faker->numberBetween(100, 2000),
             'active'        => $this->faker->boolean
         ];

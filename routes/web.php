@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::resource( 'exams', ExamController::class);
+
+Route::resource( 'questions', QuestionController::class);
 
 
 Route::get('/dashboard', function () {

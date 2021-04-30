@@ -13,6 +13,20 @@ class Exam extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'exam_code',
+        'user_id',
+        'title',
+        'description',
+        'time_limit',
+        'active',
+    ];
+
+    /**
      * Get the user that owns the Exam
      */
     public function user()

@@ -16,6 +16,8 @@ class CreateExamsTable extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('exam_code', 5)->unique();
+            $table->string('title', 50);
+            $table->string('description', 255);
             $table->foreignId('user_id')->contstrained();
             $table->integer('time_limit');
             $table->boolean('active');
