@@ -24,7 +24,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        
+
         return view('questions.create');
     }
 
@@ -36,7 +36,83 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'question_type' => 'required',
+            'exam_id' => 'required',
+        ]);
+
+
+// store question based on question_type
+        if ($request->question_type == "text_question")
+        {
+            $request->validate([
+                'question_text' => 'required',
+                'question_answer' => 'required',
+            ]);
+            // save question
+            $exam = Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 1,
+                'text' => $request->question_text,
+            ]);
+            // save answer into answers with empty attendance_id
+            // TODO
+
+        } else if ($request->question_type == "select_question")
+        {
+            $request->validate([
+                'question_text' => 'required',
+                'question_answer' => 'required',
+                'number_of_options' => 'required'
+            ]);
+            // save question
+            $exam = Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 2,
+                'text' => $request->question_text,
+            ]);
+            for ($i=0; $i < $request->number_of_options; $i++){
+                // save each $request->option_0 ...
+            }
+            // save answer into answers with empty attendance_id
+            // TODO
+
+        } else if ($request->question_type == "connect_question")
+        {
+            $request->validate([
+                'question_text' => 'required',
+                'question_answer' => 'required',
+                'number_of_options' => 'required'
+            ]);
+            // save question
+            $exam = Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 3,
+                'text' => $request->question_text,
+            ]);
+            for ($i=0; $i < $request->number_of_options; $i++){
+                // save each $request->option_0_left AND $request->option_0_left ...
+            }
+            // save answer into answers with empty attendance_id
+            // TODO
+        } else if ($request->question_type == "image_question") {
+            $request->validate(['question_text' => 'required',]);
+            Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 4,
+                'text' => $request->question_text,
+            ]);
+
+        } else if ($request->question_type == "formula_question") {
+            $request->validate(['question_text' => 'required',]);
+            Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 5,
+                'text' => $request->question_text,
+            ]);
+        }
+
+        return redirect('/exams/' .  $request->exam_id);
     }
 
     /**

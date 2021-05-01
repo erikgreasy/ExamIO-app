@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(5)->create();
         Exam::factory(50)->create();
-        QuestionType::factory(4)->create();
+        QuestionType::factory(5)->create();
         Question::factory(100)->create();
     }
 }

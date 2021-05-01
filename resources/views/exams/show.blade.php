@@ -11,7 +11,7 @@
 
         <div class="mb-3 pt-0 my-2">
             {{ $exam_description }}
-        </div> 
+        </div>
 
         <div class="flex flex-col">
             @foreach ($questions as $question)
@@ -26,40 +26,53 @@
         <hr>
 
         <button type="button" id="add_question_to_test" class="max-w-xs my-4 bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Pridať novú otázku</button>
-           
+
         </div>
 </section>
 
 
 
 <!-- div that will pop up when adding new question -->
-<div id="add_question_modal" class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800" style="display:none">
-    <div class="bg-white rounded-lg w-1/2">
-        <div class="flex flex-col items-start p-4">
-        <div class="flex items-center w-full">
-            <div class="text-gray-900 font-medium text-lg">Pridať novú otázku k testu</div>
-            <svg class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
-                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
-            </svg>
+<div id="add_question_modal" class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800">
+    <div class="bg-white rounded-lg w-1/2  py-5 px-5">
+
+        <div class="flex flex-col">
+            <div class="flex flex-col items-start p-4">
+            <div class="flex items-center w-full">
+                <div class="text-gray-900 font-medium text-lg">Pridať novú otázku k testu</div>
+            </div>
+            <hr>
+            <div class="">Zvolte typ otázky a následne vyplnte potrebné polia</div>
+<!-- select questionType -->
+            <div class="flex flex-wrap py-3 w-full">
+                <div class="w-full flex flex-wrap lg:w-6/12 py-2">
+                    <div class="relative w-full border-none">
+                        <select name="questionType" id="select_questionType" class="bg-gray-600 text-gray-400 appearance-none border-none inline-block py-3 pl-3 pr-8 rounded leading-tight w-full">
+                            <option class="pt-6" value="textQuestion">Textová</option>
+                            <option value="connectQuestion">Spájacia</option>
+                            <option value="selectQuestion">Výberová</option>
+                            <option value="imageQuestion">Obrázok</option>
+                            <option value="formulaQuestion">vzorec</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <hr>
-        <div class="">Zvolte typ otázky a následne vyplnte potrebné polia</div>
-        <select name="questionType" id="select_questionType">
-            <option value="textQuestion">Textová</option>
-            <option value="connectQuestion">Spájacia</option>
-            <option value="selectQuestion">Výberová</option>
-            <option value="imageQuestion">Obrázok</option>
-            <option value="formulaQuestion">vzorec</option>
-        </select>
-        <hr>
-        <div class="ml-auto">
-            <button id="add_question_modal_create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Pridať
-            </button>
-            <button id="add_question_modal_cancel" class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-            Zrušiť
-            </button>
-        </div>
+        <form method="post" action="{{ route('questions.store') }}">
+            @csrf
+            <input type="hidden" name="exam_id" value="{{ $exam_id }}">
+            <div id="add_question_selected"></div>
+        </form>
+
+            <div class="ml-auto">
+                <button type="button" id="add_question_modal_cancel" class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                Zrušiť
+                </button>
+            </div>
         </div>
     </div>
 </div>

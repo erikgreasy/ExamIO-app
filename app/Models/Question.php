@@ -11,6 +11,17 @@ class Question extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'exam_id',
+        'type_id',
+        'text',
+    ];
+
     public function questionType() {
         return $this->belongsTo(QuestionType::class, 'type_id');
     }

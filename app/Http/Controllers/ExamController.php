@@ -37,15 +37,15 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'exam_title' => 'required|max:50',
             'time_limit' => 'required',
             'exam_description' => 'required|max:255',
         ]);
-        
+
         $exam = Exam::create([
             'exam_code' => Str::random(5),
-            'user_id' => 1,                     // TODO ADDED user_id who is logged in !!
+            'user_id' => 1,                     // TODO ADD user_id who is logged in !!
             'time_limit' => $request->time_limit,
             'active' => true,
             'title' => $request->exam_title,
@@ -63,14 +63,15 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
-        $questions = Question::where('exam_id', $exam->id);
+        $questions = Question::where('exam_id', $exam->id)->get();
 
         return view('exams.show')
                     ->with('exam_title', $exam->title)
                     ->with('time_limit', $exam->time_limit)
                     ->with('exam_description', $exam->description)
                     ->with('exam_code', $exam->exam_code)
-                    ->with('questions', $questions);
+                    ->with('questions', $questions)
+                    ->with('exam_id', $exam->id);
     }
 
     /**
