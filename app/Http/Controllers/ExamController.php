@@ -16,7 +16,7 @@ class ExamController extends Controller
      */
     public function index()
     {
-        return Exam::all();
+        return Exam::where('user_id', auth()->id())->get();
     }
 
     /**
@@ -45,7 +45,7 @@ class ExamController extends Controller
 
         $exam = Exam::create([
             'exam_code' => Str::random(5),
-            'user_id' => 1,                     // TODO ADD user_id who is logged in !!
+            'user_id' => auth()->id(),
             'time_limit' => $request->time_limit,
             'active' => true,
             'title' => $request->exam_title,

@@ -18,7 +18,7 @@
         <script src="{{ asset('js/question.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-custom-blue">
             @include('layouts.guest_header')
 
             <!-- Page Heading -->

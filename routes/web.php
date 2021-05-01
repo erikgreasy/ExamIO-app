@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Exam;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
@@ -19,13 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource( 'exams', ExamController::class);
+Route::resource( 'exams', ExamController::class)->middleware(['auth']);
 
 Route::resource( 'questions', QuestionController::class);
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $userId = auth()->id();
+    $myExams = Exam::where('user_id', $userId)->get();
+    return view('dashboard')->with('exams', $myExams);
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
