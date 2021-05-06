@@ -22,7 +22,8 @@
                 <b>Text otazky:</b> {{ $exam->title }}<br>
                 <b>Typ otazky:</b> {{ $exam->active }}<br>
                 <b>ID testu:</b> {{ $exam->exam_code }}<br>
-                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exams.show',$exam->id) }}">Upravit</a><br>
+                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exams.attendances.index', $exam) }}">Zobrazit vypracovania</a>
+                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exams.edit', $exam) }}">Upravit</a><br>
             </div>
             <hr>
         @endforeach

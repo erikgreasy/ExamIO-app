@@ -63,15 +63,16 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
-        $questions = Question::where('exam_id', $exam->id)->get();
+        return view('exams.show');
+        // $questions = Question::where('exam_id', $exam->id)->get();
 
-        return view('exams.show')
-                    ->with('exam_title', $exam->title)
-                    ->with('time_limit', $exam->time_limit)
-                    ->with('exam_description', $exam->description)
-                    ->with('exam_code', $exam->exam_code)
-                    ->with('questions', $questions)
-                    ->with('exam_id', $exam->id);
+        // return view('exams.show')
+        //             ->with('exam_title', $exam->title)
+        //             ->with('time_limit', $exam->time_limit)
+        //             ->with('exam_description', $exam->description)
+        //             ->with('exam_code', $exam->exam_code)
+        //             ->with('questions', $questions)
+        //             ->with('exam_id', $exam->id);
     }
 
     /**
@@ -82,7 +83,9 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        //
+        return view( 'exams.edit', [
+            'exam'  => $exam
+        ]);
     }
 
     /**

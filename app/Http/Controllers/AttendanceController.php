@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exam;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,11 @@ class AttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Exam $exam)
     {
-        //
+        return view('attendances.index', [
+            'exam'   => $exam
+        ]);
     }
 
     /**
@@ -22,9 +25,18 @@ class AttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $code = $request->exam_code;
+        $exam = Exam::where('exam_code', $code)->first();
+
+        if(!$exam) {
+            return view('exams.notfound');
+        }
+
+        return view('attendances.create', [
+            'exam'  => $exam
+        ]);
     }
 
     /**
@@ -33,9 +45,9 @@ class AttendanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Exam $exam,Request $request)
     {
-        //
+        return redirect()->route('exams.show', Exam::findOrFail($request->exam_id));
     }
 
     /**
@@ -44,7 +56,7 @@ class AttendanceController extends Controller
      * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function show(Attendance $attendance)
+    public function show(Exam $exam, Attendance $attendance)
     {
         //
     }
