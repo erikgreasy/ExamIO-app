@@ -20,14 +20,14 @@
                 <b>Typ otazky:</b> {{ $question->type_id }}<br>
                 <b>ID testu:</b> {{ $question->exam_id }}<br>
                 </p><hr>
-            <div>
+            </div>
             @endforeach
         </div>
         <hr>
 
         <button type="button" id="add_question_to_test" class="max-w-xs my-4 bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Pridať novú otázku</button>
 
-        </div>
+    </div>
 </section>
 
 

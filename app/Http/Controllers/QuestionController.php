@@ -50,6 +50,12 @@ class QuestionController extends Controller
                 'question_answer' => 'required',
             ]);
 
+            $question = Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 1,
+                'text' => $request->question_text,
+            ]);
+
             // save answer into answers with empty attendance_id
             // TODO
 
@@ -58,42 +64,87 @@ class QuestionController extends Controller
             $request->validate([
                 'question_text' => 'required',
                 'question_answer' => 'required',
-                'number_of_options' => 'required'
+                'number_of_options' => 'required',
+                'options' => 'required'
             ]);
 
-            for ($i=0; $i < $request->number_of_options; $i++){
-                // save each $request->option_0 ...
-            }
-            // save answer into answers with empty attendance_id
             // TODO
+            $question = Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 2,
+                'text' => $request->question_text,
+            ]);
+//
+//            for ($i=0; $i < $request->number_of_options; $i++){
+//                $selectOption = SelectOption::create([
+//                    'text' => $request->options[i],
+//                    'question_id' => $question->id(),
+//                    is_correct=> true,
+//                ]);
+//
+//                Answer::create([
+//                    'attendance_id' => null,
+//                    'question_id' => $question->id(), // TODO model should contain exam_id instead
+//                    'text' => null,
+//                    'img_path' => null,
+//                    'select_option_id' => null,
+//                    'is_correct' => true
+//                ]);
+//            }
 
         } else if ($request->question_type == "connect_question")
         {
             $request->validate([
                 'question_text' => 'required',
                 'question_answer' => 'required',
-                'number_of_options' => 'required'
+                'number_of_options' => 'required',
+                'options' => 'required'
             ]);
 
-            for ($i=0; $i < $request->number_of_options; $i++){
-                // save each $request->option_0_left AND $request->option_0_left ...
-            }
-            // save answer into answers with empty attendance_id
             // TODO
+            $question = Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 3,
+                'text' => $request->question_text,
+            ]);
+//
+//            for ($i=0; $i < $request->number_of_options; $i++){
+//                $optionLeft = PairOption::create(['text' => $request->options[i]['left']]);
+//                $optionRight = PairOption::create(['text' => $request->options[i]['right']]);
+//
+//                $answer = Answer::create([
+//                    'attendance_id' => null,
+//                    'question_id' => $question->id(), // TODO model should contain exam_id instead
+//                    'text' => null,
+//                    'img_path' => null,
+//                    'select_option_id' => null,
+//                    'is_correct' => true
+//                ]);
+//
+//
+//                $pair = PairAnswer::create([
+//                    'left_pair_option' => $optionLeft->id(),
+//                    'right_pair_option' => $optionRight->id(),
+//                    'answer_id' => $answer->id(),
+//                ]);
+//            }
 
         } else if ($request->question_type == "image_question") {
             $request->validate(['question_text' => 'required',]);
-
+            Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 4,
+                'text' => $request->question_text,
+            ]);
         } else if ($request->question_type == "formula_question") {
             $request->validate(['question_text' => 'required',]);
+            Question::create([
+                'exam_id' => $request->exam_id,
+                'type_id' => 5,
+                'text' => $request->question_text,
+            ]);
         }
 
-        // save question
-        Question::create([
-            'exam_id' => $request->exam_id,
-            'type_id' => 3,
-            'text' => $request->question_text,
-        ]);
 
         return redirect('/exams/' .  $request->exam_id);
     }

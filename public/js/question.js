@@ -74,12 +74,12 @@ function createSelectQuestion(id){
             Zadajte možnosti:
             <div id="select_question_options" class="flex flex-col">
                 <div class="mb-4">
-                    <input placeholder="Otázka" name="option_0"
+                    <input placeholder="Otázka" name="options[0]"
                         class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="text_question_text" type="text">
                 </div>
                 <div class="mb-4">
-                    <input placeholder="Otázka" name="option_1"
+                    <input placeholder="Otázka" name="options[1]"
                         class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="text_question_text" type="text">
                 </div>
@@ -101,7 +101,7 @@ function createSelectQuestion(id){
     $("#button_select_add_option").on('click',function(){
         $("#select_question_options").append(`
         <div class="mb-4">
-            <input placeholder="Možnosť ` + select_options_count +`" name="name="option_` + select_options_count +`"
+            <input placeholder="Možnosť ` + select_options_count +`" name="name="options[` + select_options_count +`]"
                 class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="text_question_text" type="text">
         </div>`);
@@ -126,24 +126,24 @@ function createConnectQuestion(id){
             <div id="connect_question_options" class="flex flex-col">
                 <div class="flex flex-row">
                      <div class="mb-4">
-                        <input placeholder="Otázka" name="option_0_left"
+                        <input placeholder="Otázka" name="options[0][left]"
                             class="shadow appearance-none  rounded w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="text_question_text" type="text">
                     </div>
                     <div class="mb-4 ml-4">
-                        <input placeholder="Správna odpoveď" name="option_0_right"
+                        <input placeholder="Správna odpoveď" name="options[0][right]"
                             class="shadow appearance-none  rounded  w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="text_question_text" type="text">
                     </div>
                 </div>
                 <div class="flex flex-row">
                      <div class="mb-4">
-                        <input placeholder="Otázka" name="option_1_left"
+                        <input placeholder="Otázka" name="options[1][left]"
                             class="shadow appearance-none  rounded w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="text_question_text" type="text">
                     </div>
                     <div class="mb-4 ml-4">
-                        <input placeholder="Správna odpoveď" name="option_1_right"
+                        <input placeholder="Správna odpoveď" name="options[1][right]"
                             class="shadow appearance-none  rounded  w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="text_question_text" type="text">
                     </div>
@@ -159,12 +159,12 @@ function createConnectQuestion(id){
         $("#connect_question_options").append(`
         <div class="flex flex-row">
              <div class="mb-4">
-                <input placeholder="Otázka" name="option_` + connect_options_count +`_left"
+                <input placeholder="Otázka" name="options[` + connect_options_count +`][left]"
                     class="shadow appearance-none  rounded w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="text_question_text" type="text">
             </div>
             <div class="mb-4 ml-4">
-                <input placeholder="Správna odpoveď" name="option_` + connect_options_count +`_right"
+                <input placeholder="Správna odpoveď" name="options[` + connect_options_count +`][right]"
                     class="shadow appearance-none  rounded  w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="text_question_text" type="text">
             </div>
