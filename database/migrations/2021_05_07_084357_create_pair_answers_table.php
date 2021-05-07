@@ -18,7 +18,7 @@ class CreatePairAnswersTable extends Migration
             $table->foreignId('left_pair_option_id')->constrained();
             $table->foreignId('right_pair_option_id')->constrained();
             $table->foreignId('answer_id')->nullable()->constrained();
-            $table->foreignId('question_id')->nullable()->constrained();
+            $table->foreignId('question_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

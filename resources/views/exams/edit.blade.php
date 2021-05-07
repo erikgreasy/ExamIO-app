@@ -23,15 +23,23 @@
             <div class="my-2 flex flex-col">
                 <div class="grid grid-cols-3 gap-4">
                     <span class="text-xl sm:text-xl col-span-2">{{ $pos }}) {{ $question->text }}</span>
-                    <div>
-                        <a href="{{ route('exams.questions.edit', [$exam, $question]) }}">
-                            <button  class="bg-custom-blue hover:bg-custom-blue text-white font-bold mx-2 py-2 px-4 rounded-full w-1/4">
-                                Upraviť
-                            </button>
-                        </a>
-                        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-1/4">
-                            Zmazať
+                    <div class="flex justify-end">
+
+                        <button  class="bg-custom-blue hover:bg-custom-blue_dark text-white font-bold mx-2 py-2 px-4 rounded-full w-1/4">
+                            <a href="{{ route('exams.questions.edit', [$exam, $question]) }}">
+                            Upraviť
+                            </a>
                         </button>
+
+
+                        <form class="w-1/4" action="{{ route('exams.questions.destroy', [$exam, $question]) }}" method="POST">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full">
+                                    Zmazať
+                            </button>
+                        </form>
 
                     </div>
 

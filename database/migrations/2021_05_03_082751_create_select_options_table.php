@@ -16,7 +16,7 @@ class CreateSelectOptionsTable extends Migration
         Schema::create('select_options', function (Blueprint $table) {
             $table->id();
             $table->string('text');
-            $table->foreignId('question_id')->constrained();
+            $table->foreignId('question_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('is_correct');
             $table->timestamps();
         });

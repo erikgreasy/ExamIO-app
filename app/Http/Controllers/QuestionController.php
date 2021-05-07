@@ -198,8 +198,9 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Exam $exam, Question $question)
     {
-        //
+        Question::destroy($question->id);
+        return redirect()->route('exams.edit', [$exam->id]);
     }
 }
