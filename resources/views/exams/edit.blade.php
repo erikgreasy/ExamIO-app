@@ -44,8 +44,9 @@
                     </div>
 
                 </div>
-                <div><b>Typ otazky:</b> {{ $question->type_id }}</div>
-                <div><b>ID testu:</b> {{ $exam->id }}</div>
+                <div>
+                    <b>Typ otazky:</b> {{ $question->questionType->full_name }}<br>
+                </div>
             </div><hr>
             <?php $pos++; ?>
             @endforeach
