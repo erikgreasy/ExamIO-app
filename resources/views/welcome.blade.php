@@ -16,11 +16,11 @@
 
     </head>
 <body>
-  
+
     <div class="bg-custom-blue_dark relative overflow-hidden">
         <div class="inset-0 bg-black opacity-25 absolute"></div>
 
-       @include('layouts.guest_header')
+       @include('layouts.navigation')
 
         <div class="container mx-auto px-6 md:px-12 relative z-10 flex justify-center  flex-wrap items-center py-24 xl:py-40">
             <div class="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
@@ -104,18 +104,18 @@
         <div class="max-w-7xl px-6 py-16 mx-auto">
             <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight text-custom-blue_dark my-4 text-center uppercase">
             až 5 typov otázok</h1>
-    
+
             <div class="grid gap-8 mt-10 md:grid-cols-3 lg:grid-cols-5">
                 <div class="px-6 py-8 overflow-hidden bg-white rounded-md shadow-md">
                     <h2 class="text-xl font-medium text-gray-800">Textová odpoveď</h2>
                     <p class="max-w-md mt-4 text-gray-400">Klasická textová odpoveď na otázku, s možnosťou automatickej opravy.</p>
                 </div>
-    
+
                 <div class="px-6 py-8 overflow-hidden bg-white rounded-md shadow-md">
                     <h2 class="text-xl font-medium text-gray-800">Výber z možností</h2>
                     <p class="max-w-md mt-4 text-gray-400">Žiakovi sú zobrazené dopredu zadefinované možnosti a musí vybrať tú správnu.</p>
                 </div>
-    
+
                 <div class="px-6 py-8 overflow-hidden bg-white rounded-md shadow-md">
                     <h2 class="text-xl font-medium text-gray-800">Spájanie možností</h2>
                     <p class="max-w-md mt-4 text-gray-400">Úloha žiaka je pospájať objekty, rozdelené do dvoch skupín.</p>
@@ -132,17 +132,17 @@
         </div>
     </section><hr class="max-w-7xl mx-auto">
 
-    
+
 <!-- Its for free! -->
     <section class="bg-white py-10 px-6">
         <div class="max-w-7xl py-10 mx-auto">
             <div class="py-12 bg-gray-800 rounded-md md:px-20 md:flex md:items-center md:justify-between">
                 <div>
                     <h3 class="text-2xl font-semibold text-white">Naše služby sú úplne zadarmo!</h3>
-                    <p class="max-w-md mt-4 text-gray-400">Poskytnuté služby pre pomoc pri vzdelávaní a hodnotení študentov 
+                    <p class="max-w-md mt-4 text-gray-400">Poskytnuté služby pre pomoc pri vzdelávaní a hodnotení študentov
                     sú úplne zdarma, no môžte nás podporiť a tým urýchliť vývoj.</p>
                 </div>
-    
+
                 <a class="block px-8 py-2 mt-6 text-lg font-medium text-center text-white transition-colors duration-300 transform bg-custom-blue rounded md:mt-0 hover:bg-custom-kako" href="#">Podporiť</a>
             </div>
         </div>
@@ -154,28 +154,28 @@
         <div class="max-w-7xl px-6 py-16 mx-auto text-center">
             <h2 class="text-3xl font-semibold text-gray-800">Náš tím</h2>
             <p class="max-w-lg mx-auto mt-4 text-gray-600">Tento projekt Vám prináša partia mladých ľudí, ktorí milujú fancy znejúce skratky,
-            no ešte viac technológie a preto tvorbu tejto webovej aplikácie prijali ako skvelú výzvu vstúpiť do neznámych vôd Laravelu a Dockeru. 
+            no ešte viac technológie a preto tvorbu tejto webovej aplikácie prijali ako skvelú výzvu vstúpiť do neznámych vôd Laravelu a Dockeru.
             </p>
-    
+
             <div class="grid gap-8 mt-6 md:grid-cols-2 lg:grid-cols-5">
                 <div>
                     <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/lukas.jpg') }}">
                     <h3 class="mt-2 font-medium text-gray-700">Lukáš Krivosudský</h3>
                     <p class="text-sm text-gray-600">Chief Executive Officer (CEO)</p>
                 </div>
-    
+
                 <div>
                     <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/roman.jpg') }}">
                     <h3 class="mt-2 font-medium text-gray-700">Roman Bútora</h3>
                     <p class="text-sm text-gray-600">Chief Operating Officer (COO)</p>
                 </div>
-    
+
                 <div>
                     <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/marek.jpg') }}">
                     <h3 class="mt-2 font-medium text-gray-700">Marek Lunter</h3>
                     <p class="text-sm text-gray-600">Chief IT Security Officer (CISO)</p>
                 </div>
-    
+
                 <div>
                     <img class="object-cover object-center w-full h-64 rounded-md shadow" src="{{ asset('img/erik.jpg') }}">
                     <h3 class="mt-2 font-medium text-gray-700">Erik Masný</h3>

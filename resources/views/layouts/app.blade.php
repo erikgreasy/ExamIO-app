@@ -21,7 +21,7 @@
         <div id="app">
 
             <div class="h-full bg-custom-blue">
-                @include('layouts.guest_header')
+                @include('layouts.navigation')
 
                 <!-- Page Heading -->
 
