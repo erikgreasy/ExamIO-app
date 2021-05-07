@@ -3,24 +3,43 @@
 @section('content')
 
 <section class="py-10 px-6 bg-custom-blue_dark">
-    <div class="max-w-7xl h-screen px-6 py-16 mx-auto bg-gray-100 mt-10">
-        <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight my-4 text-center uppercase">Test: {{ $exam->title }} </h1><br>
-        <b>Kod testu:</b> {{ $exam->exam_code }} <br>
-        <b>limit:</b> {{ $exam->time_limit }} <br><hr>
+    <div class="max-w-7xl h-full px-6 py-16 mx-auto bg-gray-100 mt-10">
+        <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight mt-3 text-center uppercase">Test: {{ $exam->title }} </h1><br>
+        <h3 class="font-roboto-slab font-bold text-lg leading-tight my-2 text-center uppercase">Kód testu: <span class="text-custom-pink underline text-3xl sm:text-4xl">{{ $exam->exam_code }}</span> </h3><br>
 
-
-        <div class="mb-3 pt-0 my-2">
-            {{ $exam->description }}
+        <div class="my-2">
+            <b>Časový limit:</b> <span class="text-custom-pink text-2xl sm:text-2xl">{{ $exam->time_limit }} minút</span>
         </div>
 
+
+        <div class="mb-3 pt-0 mt-2 mb-7 ">
+            <b>Popis testu:</b> {{ $exam->description }}
+        </div>
+        <hr>
+
         <div class="flex flex-col">
+            <?php $pos = 1; ?>
             @foreach ($exam->questions as $question)
-            <div> <hr>
-                <p><b>Text otazky:</b> {{ $question->text }}<br>
-                <b>Typ otazky:</b> {{ $question->type_id }}<br>
-                <b>ID testu:</b> {{ $exam->id }}<br>
-                </p><hr>
-            <div>
+            <div class="my-2 flex flex-col">
+                <div class="grid grid-cols-3 gap-4">
+                    <span class="text-xl sm:text-xl col-span-2">{{ $pos }}) {{ $question->text }}</span>
+                    <div>
+                        <a href="{{ route('exams.questions.edit', [$exam, $question]) }}">
+                            <button  class="bg-custom-blue hover:bg-custom-blue text-white font-bold mx-2 py-2 px-4 rounded-full w-1/4">
+                                Upraviť
+                            </button>
+                        </a>
+                        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-1/4">
+                            Zmazať
+                        </button>
+
+                    </div>
+
+                </div>
+                <div><b>Typ otazky:</b> {{ $question->type_id }}</div>
+                <div><b>ID testu:</b> {{ $exam->id }}</div>
+            </div><hr>
+            <?php $pos++; ?>
             @endforeach
         </div>
         <hr>
@@ -62,7 +81,7 @@
             </div>
 
         </div>
-        <form method="post" action="{{ route('questions.store') }}" class="p-4">
+        <form method="post" action="{{ route('exams.questions.store', [$exam]) }}" class="p-4">
             @csrf
             <input type="hidden" name="exam_id" value="{{ $exam->id }}">
             <div id="add_question_selected"></div>

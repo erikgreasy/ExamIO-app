@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
-use App\Models\SelectOption;
+use App\Models\Exam;
 use App\Models\Answer;
+use App\Models\Question;
+use App\Models\PairAnswer;
+use App\Models\SelectOption;
 use App\Models\LeftPairOption;
 use App\Models\RightPairOption;
-use App\Models\PairAnswer;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -83,14 +84,14 @@ class QuestionController extends Controller
                 'type_id' => 2,
                 'text' => $request->question_text,
             ]);
-            
+
         // save each option
         $i = 0;
         foreach($request->options as $option){
             $selectOption = SelectOption::create([
                    'text' => $option,
                    'question_id' => $question->id,
-                   'is_correct' => ($i == intval($request->correct_option)) // only correct_option int will be correct answer 
+                   'is_correct' => ($i == intval($request->correct_option)) // only correct_option int will be correct answer
                ]);
 
             Answer::create([
@@ -116,7 +117,7 @@ class QuestionController extends Controller
                 'type_id' => 3,
                 'text' => $request->question_text,
             ]);
-            
+
             // save each option
             foreach($request->options as $option) {
                $optionLeft = LeftPairOption::create([
@@ -129,7 +130,7 @@ class QuestionController extends Controller
                    ]);
 
 
-               $pair = PairAnswer::create([
+               PairAnswer::create([
                    'left_pair_option_id' => $optionLeft->id,
                    'right_pair_option_id' => $optionRight->id,
                    'answer_id' => null,
@@ -174,9 +175,9 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
+    public function edit(Exam $exam, Question $question)
     {
-        //
+        return view('questions.edit');
     }
 
     /**

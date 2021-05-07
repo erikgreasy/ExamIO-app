@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Route::resource( 'exams', ExamController::class);
 
-Route::resource( 'questions', QuestionController::class);
+Route::resource( 'exams.questions', QuestionController::class);
 
 Route::resource('exams.attendances', AttendanceController::class)->middleware('auth');
 Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
