@@ -189,7 +189,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+//        Question::where('id', $question->id)
+//            ->update(['active' => $question->active]);
     }
 
     /**

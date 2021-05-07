@@ -88,7 +88,9 @@ class ExamController extends Controller
      */
     public function update(Request $request, Exam $exam)
     {
-        //
+        Exam::where('id', $exam->id)
+            ->update(['active' => !$exam->active]);
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -99,6 +101,8 @@ class ExamController extends Controller
      */
     public function destroy(Exam $exam)
     {
-        //
+        Exam::destroy($exam->id);
+//        return redirect()->route('dashboard');
     }
+
 }
