@@ -73,7 +73,8 @@ class QuestionController extends Controller
         {
             $request->validate([
                 'question_text' => 'required',
-                'options' => 'required'
+                'options' => 'required',
+                'correct_option' => 'required|Integer'
             ]);
 
 
@@ -84,21 +85,23 @@ class QuestionController extends Controller
             ]);
             
         // save each option
+        $i = 0;
         foreach($request->options as $option){
-                $selectOption = SelectOption::create([
+            $selectOption = SelectOption::create([
                    'text' => $option,
                    'question_id' => $question->id,
-                   'is_correct' => true,
+                   'is_correct' => ($i == intval($request->correct_option)) // only correct_option int will be correct answer 
                ]);
 
-               Answer::create([
+            Answer::create([
                    'attendance_id' => null,
                    'question_id' => $question->id,
                    'text' => null,
                    'img_path' => null,
                    'select_option_id' => $selectOption->id,
-                   'is_correct' => true
+                   'is_correct' => false,
                ]);
+            $i++;
         }
 
         } else if ($request->question_type == "connect_question")
