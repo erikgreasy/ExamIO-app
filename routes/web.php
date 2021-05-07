@@ -4,6 +4,8 @@ use App\Models\Exam;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ExamProcessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +22,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource( 'exams', ExamController::class)->middleware(['auth']);
+Route::resource( 'exams', ExamController::class);
 
 Route::resource( 'questions', QuestionController::class);
 
+Route::resource('exams.attendances', AttendanceController::class)->middleware('auth');
+Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
 
 Route::get('/dashboard', function () {
     $userId = auth()->id();

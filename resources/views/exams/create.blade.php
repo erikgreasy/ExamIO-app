@@ -7,7 +7,6 @@
     <div class="max-w-7xl h-screen px-6 py-16 mx-auto bg-gray-100 mt-10">
         <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight my-4 text-center uppercase">Nový test</h1>
 
-            
 
 
 <!-- Create new exam -->
@@ -44,6 +43,7 @@
                     </div>
                 @enderror
             </div>
+            <example-component></example-component>
 
             <button type="submit" class="max-w-xs my-4 bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Vytvoriť test</button>
         </form>

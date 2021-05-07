@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\SelectOption;
+use App\Models\Answer;
+use App\Models\LeftPairOption;
+use App\Models\RightPairOption;
+use App\Models\PairAnswer;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -41,7 +46,6 @@ class QuestionController extends Controller
             'exam_id' => 'required',
         ]);
 
-
         // store question based on question_type
         if ($request->question_type == "text_question")
         {
@@ -56,78 +60,80 @@ class QuestionController extends Controller
                 'text' => $request->question_text,
             ]);
 
-            // save answer into answers with empty attendance_id
-            // TODO
+            Answer::create([
+                'attendance_id' => null,
+                'question_id' => $question->id,
+                'text' => $request->question_answer,
+                'img_path' => null,
+                'select_option_id' => null,
+                'is_correct' => true
+            ]);
 
         } else if ($request->question_type == "select_question")
         {
             $request->validate([
                 'question_text' => 'required',
-                'question_answer' => 'required',
-                'number_of_options' => 'required',
                 'options' => 'required'
             ]);
 
-            // TODO
+
             $question = Question::create([
                 'exam_id' => $request->exam_id,
                 'type_id' => 2,
                 'text' => $request->question_text,
             ]);
-//
-//            for ($i=0; $i < $request->number_of_options; $i++){
-//                $selectOption = SelectOption::create([
-//                    'text' => $request->options[i],
-//                    'question_id' => $question->id(),
-//                    is_correct=> true,
-//                ]);
-//
-//                Answer::create([
-//                    'attendance_id' => null,
-//                    'question_id' => $question->id(), // TODO model should contain exam_id instead
-//                    'text' => null,
-//                    'img_path' => null,
-//                    'select_option_id' => null,
-//                    'is_correct' => true
-//                ]);
-//            }
+            
+        // save each option
+        foreach($request->options as $option){
+                $selectOption = SelectOption::create([
+                   'text' => $option,
+                   'question_id' => $question->id,
+                   'is_correct' => true,
+               ]);
+
+               Answer::create([
+                   'attendance_id' => null,
+                   'question_id' => $question->id,
+                   'text' => null,
+                   'img_path' => null,
+                   'select_option_id' => $selectOption->id,
+                   'is_correct' => true
+               ]);
+        }
 
         } else if ($request->question_type == "connect_question")
         {
             $request->validate([
                 'question_text' => 'required',
-                'question_answer' => 'required',
-                'number_of_options' => 'required',
                 'options' => 'required'
             ]);
 
-            // TODO
             $question = Question::create([
                 'exam_id' => $request->exam_id,
                 'type_id' => 3,
                 'text' => $request->question_text,
             ]);
-//
-//            for ($i=0; $i < $request->number_of_options; $i++){
-//                $optionLeft = PairOption::create(['text' => $request->options[i]['left']]);
-//                $optionRight = PairOption::create(['text' => $request->options[i]['right']]);
-//
-//                $answer = Answer::create([
-//                    'attendance_id' => null,
-//                    'question_id' => $question->id(), // TODO model should contain exam_id instead
-//                    'text' => null,
-//                    'img_path' => null,
-//                    'select_option_id' => null,
-//                    'is_correct' => true
-//                ]);
-//
-//
-//                $pair = PairAnswer::create([
-//                    'left_pair_option' => $optionLeft->id(),
-//                    'right_pair_option' => $optionRight->id(),
-//                    'answer_id' => $answer->id(),
-//                ]);
-//            }
+            
+            // save each option
+            foreach($request->options as $option) {
+               $optionLeft = LeftPairOption::create([
+                    'text' => $option['left'],
+                    'question_id' => $question->id
+                    ]);
+               $optionRight = RightPairOption::create([
+                   'text' => $option['right'],
+                   'question_id' => $question->id
+                   ]);
+
+
+               $pair = PairAnswer::create([
+                   'left_pair_option_id' => $optionLeft->id,
+                   'right_pair_option_id' => $optionRight->id,
+                   'answer_id' => null,
+                   'question_id' => $question->id
+               ]);
+            }
+
 
         } else if ($request->question_type == "image_question") {
             $request->validate(['question_text' => 'required',]);
@@ -145,8 +151,7 @@ class QuestionController extends Controller
             ]);
         }
 
-
-        return redirect('/exams/' .  $request->exam_id);
+        return redirect()->route('exams.edit', [$request->exam_id]);
     }
 
     /**

@@ -32,8 +32,8 @@
                     <p class="font-source-sans-pro text-indigo-500 mt-6 text-lg">Stačí zadať kód, ktorý vám poslal váš učiteľ. Je to jednoduché!</p>
                 </div>
 
-                <form class="xl:mt-4 mt-8 flex hidden xl:flex">
-                    <input class="p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="#A72BB"/>
+                <form class="xl:mt-4 mt-8 flex hidden xl:flex" action="{{ route('attendances.create') }}" method="GET">
+                    <input name="exam_code" class="p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="#A72BB"/>
                     <button class="px-8 rounded-r-full bg-custom-pink  hover:bg-pink-700 text-white font-bold p-4 uppercase border-t border-b border-r">Pripojte ma</button>
                 </form>
             </div>

@@ -4,7 +4,7 @@
 
 <section class="py-10 px-6 bg-custom-blue_dark">
     <div class="max-w-7xl h-screen px-6 py-16 mx-auto bg-gray-100 mt-10">
-        <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight my-4 text-center uppercase">Test: {{ $exam_title }} </h1><br>
+        <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight my-4 text-center uppercase">Test: {{ $exam->title }} </h1><br>
         <b>Kod testu:</b> {{ $exam_code }} <br>
         <b>limit:</b> {{ $time_limit }} <br><hr>
 
@@ -76,7 +76,5 @@
         </div>
     </div>
 </div>
-
-
 
 @endsection
