@@ -75,24 +75,22 @@ function createSelectQuestion(){
 
             Zadajte možnosti:
             <div id="select_question_options" class="flex flex-col">
-                <div class="mb-4">
+                <div class="mb-4 grid grid-cols-6 gap-4">
                     <input placeholder="Možnosť 1" name="options[0]"
-                        class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        class="col-span-5 shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="text">
+                    <label class="inline-flex items-center mt-3">
+                        <input type="radio" name="correct" value="0" class="form-radio h-5 w-5 text-orange-600" checked><span class="ml-2 text-gray-700">Správna</span>
+                    </label>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 grid grid-cols-6 gap-4">
                     <input placeholder="Možnosť 2" name="options[1]"
-                        class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        class="col-span-5 shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="text">
+                    <label class="inline-flex items-center mt-3">
+                        <input type="radio" name="correct" value="1" class="form-radio h-5 w-5 text-orange-600" checked><span class="ml-2 text-gray-700">Správna</span>
+                    </label>
                 </div>
-            </div>
-
-
-            Správna odpoveď:
-            <div class="mb-4">
-                <input placeholder="Poradie správnej odpovede" name="correct_option"
-                    class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    type="number">
             </div>
         </div>
     `);
@@ -101,10 +99,13 @@ function createSelectQuestion(){
 // add option on click
     $("#button_select_add_option").on('click',function(){
         $("#select_question_options").append(`
-        <div class="mb-4">
+        <div class="mb-4 grid grid-cols-6 gap-4">
             <input placeholder="Možnosť ` + (select_options_count+1) +`" name="options[` + select_options_count +`]"
-                class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="col-span-5 shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text">
+            <label class="inline-flex items-center mt-3">
+                <input type="radio" name="correct" value="` + select_options_count + `" class="form-radio h-5 w-5 text-orange-600" checked><span class="ml-2 text-gray-700">Správna</span>
+            </label>
         </div>`);
         select_options_count++;
     })

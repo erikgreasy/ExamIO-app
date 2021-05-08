@@ -75,7 +75,7 @@ class QuestionController extends Controller
             $request->validate([
                 'question_text' => 'required',
                 'options' => 'required',
-                'correct_option' => 'required|Integer'
+                'correct' => 'required|Integer'
             ]);
 
 
@@ -91,7 +91,7 @@ class QuestionController extends Controller
             $selectOption = SelectOption::create([
                    'text' => $option,
                    'question_id' => $question->id,
-                   'is_correct' => ($i == intval($request->correct_option)) // only correct_option int will be correct answer
+                   'is_correct' => ($i == intval($request->correct)) // only correct_option int will be correct answer
                ]);
 
             Answer::create([
