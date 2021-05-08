@@ -28,10 +28,12 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Exam $exam)
     {
 
-        return view('questions.create');
+        return view('questions.create', [
+            'exam'  => $exam
+        ]);
     }
 
     /**
@@ -40,12 +42,15 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Exam $exam)
     {
+        
         $request->validate([
+            'question_text'  => 'required',
             'question_type' => 'required',
             'exam_id' => 'required',
         ]);
+
 
         // store question based on question_type
         if ($request->question_type == "text_question")
