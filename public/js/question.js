@@ -58,7 +58,6 @@ function createTextQuestion(){
             </div>
 
         </div>
-        <button type="submit" id="add_question_modal_create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať</button>
     `);
 }
 
@@ -96,7 +95,6 @@ function createSelectQuestion(){
                     type="number">
             </div>
         </div>
-        <button type="submit" id="add_question_modal_create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať</button>
     `);
 
 
@@ -153,7 +151,6 @@ function createConnectQuestion(){
             </div>
 
         </div>
-        <button type="submit" id="add_question_modal_create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať</button>
     `);
 
 // add option on click
@@ -187,7 +184,6 @@ function createImageQuestion(){
                     type="text">
             </div>
         </div>
-        <button type="submit" id="add_question_modal_create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať</button>
     `);
 }
 
@@ -202,6 +198,5 @@ function createFormulaQuestion(){
                     type="text">
             </div>
         </div>
-        <button type="submit" id="add_question_modal_create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať</button>
     `);
 }

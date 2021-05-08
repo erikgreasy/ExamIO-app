@@ -20,7 +20,7 @@
         @foreach ($exams as $exam)
             <div class="m-5 flex flex-col">
                 <div class="grid grid-cols-6 gap-4">
-                    <div class="col-span-5"><b>Text otazky:</b> {{ $exam->title }}</div>
+                    <div class="col-span-5"><b>Názov testu:</b> {{ $exam->title }}</div>
                     <div class="w-full">
                         <form action="{{ route('exams.update', $exam) }}" method="POST">
                             @method('PUT')
@@ -40,8 +40,8 @@
                     </div>
 
                 </div>
-                <div><b>Typ otazky:</b> {{ $exam->active }}</div>
-                <div><b>ID testu:</b> {{ $exam->exam_code }}</div>
+                <div><b>Aktivny: </b> {{ $exam->active }}</div>
+                <div><b>Kód testu:</b> {{ $exam->exam_code }}</div>
                 <div>
                     <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exams.attendances.index', $exam) }}">Zobraziť vypracovania</a>
                     <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exams.edit', $exam) }}">Upraviť</a>
