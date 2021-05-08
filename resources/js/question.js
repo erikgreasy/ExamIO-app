@@ -5,23 +5,6 @@ $( document ).ready(function() {
 
 var select_options_count = 2, connect_options_count = 2;
 
-// on click to add question -> open modal
-$("#add_question_to_test").on('click',function(){
-    $("#add_question_modal").css('display', 'flex');
-});
-
-// modal button create -> submit form // TODO
-$("#add_question_modal_create").on('click',function(){
-    $("#add_question_modal").css('display', 'none');
-})
-
-// modal button cancel
-$("#add_question_modal_cancel").on('click',function(){
-    $("#add_question_modal").css('display', 'none');
-})
-
-
-
 // generate question based on select
 $("#select_questionType").on('change', function() {
 
