@@ -43,7 +43,6 @@
                     </div>
                 @enderror
             </div>
-            <example-component></example-component>
 
             <button type="submit" class="max-w-xs my-4 bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Vytvoriť test</button>
         </form>

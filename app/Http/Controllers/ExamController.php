@@ -52,7 +52,7 @@ class ExamController extends Controller
             'description' => $request->exam_description,
         ]);
 
-        return $this->edit($exam);
+        return redirect()->route('exams.edit', $exam->id);
     }
 
     /**
@@ -63,7 +63,9 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
-        return view('exams.show');
+        return view('exams.show', [
+            'exam'  => $exam
+        ]);
     }
 
     /**
