@@ -21,6 +21,7 @@ class LeftPairOption extends Model
     protected $fillable = [
         'text',
         'question_id',
+        'pair_answer_id',
     ];
 
     /**
