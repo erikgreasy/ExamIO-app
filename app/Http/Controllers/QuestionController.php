@@ -267,19 +267,19 @@ class QuestionController extends Controller
                 $rightOptions[$index]->save();
             }
         } else if ($request->question_type == "image_question") {
-            $request->validate(['question_text' => 'required',]);
-            Question::create([
-                'exam_id' => $request->exam_id,
-                'type_id' => 4,
-                'text' => $request->question_text,
-            ]);
+            // $request->validate(['question_text' => 'required',]);
+            // Question::create([
+            //     'exam_id' => $request->exam_id,
+            //     'type_id' => 4,
+            //     'text' => $request->question_text,
+            // ]);
         } else if ($request->question_type == "formula_question") {
-            $request->validate(['question_text' => 'required',]);
-            Question::create([
-                'exam_id' => $request->exam_id,
-                'type_id' => 5,
-                'text' => $request->question_text,
-            ]);
+            // $request->validate(['question_text' => 'required',]);
+            // Question::create([
+            //     'exam_id' => $request->exam_id,
+            //     'type_id' => 5,
+            //     'text' => $request->question_text,
+            // ]);
         }
 
         return redirect()->route('exams.edit', [$request->exam_id]);
