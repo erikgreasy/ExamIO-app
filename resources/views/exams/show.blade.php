@@ -27,16 +27,12 @@
                                 @case('Krátka odpoveď')
                                     (Zadajte slovnú odpoveď)
                                     <div>
-                                        {{-- <input type="hidden" name="question_id[]" value="{{ $question->id }}"> --}}
-                                        {{-- <input type="hidden" name="question_type[]" value="textQuestion"> --}}
                                         <input type="text" name="question_answer[]">
                                     </div>
                                 @break
                                 @case('Výber odpovede')
                                     (Vyberte možnosť)
                                     <div>
-                                        {{-- <input type="hidden" name="question_id[]" value="{{ $question->id }}"> --}}
-                                        {{-- <input type="hidden" name="question_type[]" value="selectQuestion"> --}}
                                         <select id="" name="question_answer[]">
                                             @foreach ($question->selectOptions as $option)
                                                 <option value="{{ $option->id }}">
@@ -49,24 +45,18 @@
                                 @case('Párovanie odpovedí')
                                     (Párovanie odpovedí)
                                     <div>
-                                        {{-- <input type="hidden" name="question_id[]" value="{{ $question->id }}"> --}}
-                                        {{-- <input type="hidden" name="question_type[]" value="connectQuestion"> --}}
                                         <input type="text" name="question_answer[]" value="todo">
                                     </div>
                                 @break
                                 @case('Nakreslenie obrázku')
                                     (Nakreslenie obrázku)
                                     <div>
-                                        {{-- <input type="hidden" name="question_id[]" value="{{ $question->id }}"> --}}
-                                        {{-- <input type="hidden" name="question_type[]" value="imageQuestion"> --}}
                                         <input type="text" name="question_answer[]" value="todo">
                                     </div>
                                 @break
                                 @case('Napísanie matematického výrazu')
                                     (Napísanie matematického výrazu)
                                     <div>
-                                        {{-- <input type="hidden" name="question_id[]" value="{{ $question->id }}"> --}}
-                                        {{-- <input type="hidden" name="question_type[]" value="formulaQuestion"> --}}
                                         <input type="text" name="question_answer[]" value="todo">
                                     </div>
                                 @break
