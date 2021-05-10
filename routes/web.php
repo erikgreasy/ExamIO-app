@@ -39,5 +39,4 @@ Route::resource('exams.attendances', AttendanceController::class);
 Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
 
 
-
 require __DIR__.'/auth.php';

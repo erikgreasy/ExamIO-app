@@ -119,27 +119,22 @@ class QuestionController extends Controller
 
             // save each option
             foreach ($request->options as $option) {
-                $optionLeft = LeftPairOption::create([
-                    'text' => $option['left'],
-                    'question_id' => $question->id
-                ]);
-                $optionRight = RightPairOption::create([
-                    'text' => $option['right'],
-                    'question_id' => $question->id
-                ]);
-
                 $pairAnswer = PairAnswer::create([
-                    'left_pair_option_id' => $optionLeft->id,
-                    'right_pair_option_id' => $optionRight->id,
-                    'answer_id' => null,
-                    'question_id' => $question->id
+                    'answer_id'     => null,
+                    'question_id'   => $question->id
                 ]);
 
-                $optionLeft->pair_answer_id = $pairAnswer->id;
-                $optionRight->pair_answer_id = $pairAnswer->id;
+                LeftPairOption::create([
+                    'text'          => $option['left'],
+                    'pair_answer_id'=> $pairAnswer->id,
+                    'question_id'   => $question->id
+                ]);
 
-                $optionLeft->save();
-                $optionRight->save();
+                RightPairOption::create([
+                    'text'          => $option['right'],
+                    'pair_answer_id'=> $pairAnswer->id,
+                    'question_id'   => $question->id
+                ]);
             }
         } else if ($request->question_type == "image_question") {
             $request->validate(['question_text' => 'required',]);
@@ -257,7 +252,6 @@ class QuestionController extends Controller
 
             $leftOptions  = LeftPairOption::where('question_id', $question->id)->get();
             $rightOptions = RightPairOption::where('question_id', $question->id)->get();
-            // $pairAnswers = PairAnswer::where('question_id', $question->id)->get();
 
             // save each option
             foreach ($request->options as $index => $option) {

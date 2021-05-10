@@ -15,8 +15,6 @@ class CreatePairAnswersTable extends Migration
     {
         Schema::create('pair_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('left_pair_option_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('right_pair_option_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('answer_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('question_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
-use App\Models\Attendance;
 use App\Models\Answer;
+use App\Models\Attendance;
+use App\Models\PairAnswer;
 use Illuminate\Http\Request;
+use App\Models\LeftPairOption;
+use App\Models\RightPairOption;
 
 class AttendanceController extends Controller
 {
@@ -31,7 +34,7 @@ class AttendanceController extends Controller
         $code = $request->exam_code;
         $exam = Exam::where('exam_code', $code)->first();
 
-        if(!$exam) {
+        if (!$exam) {
             return view('exams.notfound');
         }
 
@@ -46,7 +49,7 @@ class AttendanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Exam $exam,Request $request)
+    public function store(Exam $exam, Request $request)
     {
         $data = $request->validate([
             'first_name'  => 'required|string',
@@ -104,9 +107,82 @@ class AttendanceController extends Controller
      * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attendance $attendance)
+    public function update(Request $request, Exam $exam, Attendance $attendance)
     {
-        dd($request->all());
+        $request->validate([
+            'question_answer'   => 'required',
+        ]);
+
+        foreach ($exam->questions as $index => $question) {
+            $questionType = $question->questionType->full_name;
+            $questioAnswer = $request->question_answer[$index];
+
+            if ($questionType == "Krátka odpoveď") {
+                Answer::create([
+                    'attendance_id'     => $attendance->id,
+                    'question_id'       => $question->id,
+                    'text'              => $questioAnswer,
+                    'img_path'          => null,
+                    'select_option_id'  => null,
+                    'is_correct'        => false,
+                ]);
+            } else if ($questionType == "Výber odpovede") {
+                Answer::create([
+                    'attendance_id'     => $attendance->id,
+                    'question_id'       => $question->id,
+                    'text'              => null,
+                    'img_path'          => null,
+                    'select_option_id'  => $questioAnswer,
+                    'is_correct'        => false,
+                ]);
+            } else if ($questionType == "Párovanie odpovedí") {
+                // $answer = Answer::create([
+                //     'attendance_id'     => $attendance->id,
+                //     'question_id'       => $question->id,
+                //     'text'              => null,
+                //     'img_path'          => null,
+                //     'select_option_id'  => null,
+                //     'is_correct'        => false,
+                // ]);
+
+                // $pairAnswer = PairAnswer::create([
+                //     'answer_id'     => $answer->id,
+                //     'question_id'   => $question->id,
+                // ]);
+                
+                // LeftPairOption::create([
+                //     'text'          => $option['left'],
+                //     'pair_answer_id'=> $pairAnswer->id,
+                //     'question_id'   => $question->id
+                // ]);
+
+                // RightPairOption::create([
+                //     'text'          => $option['right'],
+                //     'pair_answer_id'=> $pairAnswer->id,
+                //     'question_id'   => $question->id
+                // ]);
+            } else if ($questionType == "Nakreslenie obrázku") {
+                // Answer::create([
+                //     'attendance_id'     => $attendance->id,
+                //     'question_id'       => $question->id,
+                //     'text'              => null,
+                //     'img_path'          => $questioAnswer,
+                //     'select_option_id'  => null,
+                //     'is_correct'        => false,
+                // ]);
+            } else if ($questionType == "Napísanie matematického výrazu") {
+                // Answer::create([
+                //     'attendance_id'     => $attendance->id,
+                //     'question_id'       => $question->id,
+                //     'text'              => $questioAnswer,
+                //     'img_path'          => null,
+                //     'select_option_id'  => null,
+                //     'is_correct'        => false,
+                // ]);
+            }
+        }
+
+        return redirect()->route('home');
     }
 
     /**
