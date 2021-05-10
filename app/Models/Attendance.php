@@ -13,6 +13,8 @@ class Attendance extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['first_name', 'last_name', 'ais_id', 'exam_id', 'started_at', 'active'];
+
     /**
      * Get the exam that owns the Attendance
      *

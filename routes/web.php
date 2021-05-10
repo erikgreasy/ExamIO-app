@@ -20,7 +20,7 @@ use App\Http\Controllers\ExamProcessController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::middleware(['auth'])->group(function() {
     Route::resource('exams.questions', QuestionController::class);
@@ -35,7 +35,7 @@ Route::resource( 'exams', ExamController::class);
 
 Route::resource( 'exams.questions', QuestionController::class);
 
-Route::resource('exams.attendances', AttendanceController::class)->middleware('auth');
+Route::resource('exams.attendances', AttendanceController::class);
 Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
 
 

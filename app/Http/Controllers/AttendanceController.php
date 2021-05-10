@@ -48,7 +48,22 @@ class AttendanceController extends Controller
      */
     public function store(Exam $exam,Request $request)
     {
-        return redirect()->route('exams.show', Exam::findOrFail($request->exam_id));
+        $data = $request->validate([
+            'first_name'  => 'required|string',
+            'last_name'     => 'required|string',
+            'ais_id'        => 'required'
+        ]);
+
+        $data['exam_id'] = $exam->id;
+        $data['started_at'] = now();
+        $data['active'] = true;
+
+        $attendance = Attendance::create($data);
+
+        return view('exams.show', [
+            'exam'  => $exam,
+            'attendance'    => $attendance
+        ]);
     }
 
     /**
@@ -60,12 +75,14 @@ class AttendanceController extends Controller
     public function show(Exam $exam, Attendance $attendance)
     {
         if ($attendance->active)
-            return; // TODO where return??
+            return abort(404);
 
         $answers = Answer::where('attendance_id', $attendance->id)->get();
 
         return view('attendances.show', [
-            'answers'  => $answers
+            'exam'          => $exam,
+            'attendance'    => $attendance,
+            'answers'       => $answers
         ]);
     }
 
@@ -89,7 +106,7 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, Attendance $attendance)
     {
-        //
+        dd($request->all());
     }
 
     /**
