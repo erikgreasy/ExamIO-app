@@ -57,27 +57,24 @@
                         {{-- select question --}}
 
                         <div class="my-5 flex flex-col">
-                            <input type="hidden" name="question_type" value="select_question">
+                            <input type="hidden" name="question_type" value="select_question" id="select_questionType">
                             Znenie otazky:<br>
                             <div class="mb-4">
                                 <input placeholder="Otázka" name="question_text"
                                     class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     type="text" value="{{ $question->text }}">
                             </div>
-                            <button type="button" id="button_select_add_option"
-                                class="max-w-xs my-5  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať
-                                možnosť</button>
-
+ 
                             Zadajte možnosti:
                             <div id="select_question_options" class="flex flex-col">
 
-                                @foreach ($answers as $answer)
+                                @foreach ($answers as $index => $answer)
                                     <div class="mb-4 grid grid-cols-6 gap-4">
                                         <input placeholder="Možnosť 1" name="options[]"
                                             class="col-span-5 shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             type="text" value="{{ $answer->text }}">
                                         <label class="inline-flex items-center mt-3">
-                                            <input type="radio" name="correct" value={{ $answer->is_correct ? '1' : '0' }}
+                                            <input type="radio" name="correct" value={{ $index }}
                                                 class="form-radio h-5 w-5 text-orange-600"
                                                 {{ $answer->is_correct ? 'checked' : '' }}><span
                                                 class="ml-2 text-gray-700">Správna</span>
@@ -92,16 +89,13 @@
                         {{-- pair question --}}
 
                         <div class="my-5 flex flex-col">
-                            <input type="hidden" name="question_type" value="connect_question">
+                            <input type="hidden" name="question_type" value="connect_question" id="select_questionType">
                             Znenie otazky:<br>
                             <div class="mb-4">
                                 <input placeholder="Otázka" name="question_text"
                                     class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     type="text" value="{{ $question->text }}">
                             </div>
-                            <button type="button" id="button_connect_add_option"
-                                class="max-w-xs my-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať
-                                možnosť</button>
 
                             Páry otaázok:<br>
                             <div id="connect_question_options" class="flex flex-col">
