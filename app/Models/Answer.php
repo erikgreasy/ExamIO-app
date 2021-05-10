@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Question;
 use App\Models\Attendance;
 use App\Models\SelectOption;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +34,13 @@ class Answer extends Model
     public function attendance(): BelongsTo
     {
         return $this->belongsTo(Attendance::class);
+    }
+
+    /**
+     * Get the question that belongs to the Answer
+     */
+    public function questionType() {
+        return $this->belongsTo(Question::class, 'question_id');
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use App\Models\Attendance;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -58,7 +59,14 @@ class AttendanceController extends Controller
      */
     public function show(Exam $exam, Attendance $attendance)
     {
-        //
+        if ($attendance->active)
+            return; // TODO where return??
+
+        $answers = Answer::where('attendance_id', $attendance->id)->get();
+
+        return view('attendances.show', [
+            'answers'  => $answers
+        ]);
     }
 
     /**
