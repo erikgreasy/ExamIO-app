@@ -37,6 +37,8 @@ Route::resource( 'exams.questions', QuestionController::class);
 
 Route::resource('exams.attendances', AttendanceController::class);
 Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
+Route::get('/answers/{answer}/correction',[AttendanceController::class,'correction'])->name('correction');
+
 
 
 require __DIR__.'/auth.php';

@@ -98,7 +98,16 @@ class AttendanceController extends Controller
     public function edit(Attendance $attendance)
     {
         //
+        
     }
+
+    public function correction(Answer $answer){
+        Answer::where('id',$answer->id)->update(['is_correct'=>!$answer->is_correct]);
+        
+        return back();
+    }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -112,6 +121,9 @@ class AttendanceController extends Controller
         $request->validate([
             'question_answer'   => 'required',
         ]);
+        
+            
+        Attendance::where('id',$attendance->id)->update(['active' => false]);
 
         foreach ($exam->questions as $index => $question) {
             $questionType = $question->questionType->full_name;
