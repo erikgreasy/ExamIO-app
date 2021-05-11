@@ -42,25 +42,6 @@
                                         </select>
                                     </div>
                                 @break
-<<<<<<< HEAD
-                                @case('Párovanie odpovedí')
-                                    (Párovanie odpovedí)
-                                    <div>
-                                        <input type="text" name="question_answer[]" value="todo">
-                                    </div>
-                                @break
-                                @case('Nakreslenie obrázku')
-                                    (Nakreslenie obrázku)
-                                    <div>
-                                        <input type="text" name="question_answer[]" value="todo">
-                                    </div>
-                                @break
-                                @case('Napísanie matematického výrazu')
-                                    (Napísanie matematického výrazu)
-                                    <div>
-                                        <input type="text" name="question_answer[]" value="todo">
-                                    </div>
-=======
                             @case('Párovanie odpovedí')
                                 ({{ 'Párovanie odpovedí' }})
                                 <div class="grid grid-cols-2 gap-4">
@@ -144,7 +125,6 @@
                                 <!--
                                 <button onclick="logconsole()" > BUTTON </button>
                                 -->
->>>>>>> show_test
                                 @break
                                 @default
 
