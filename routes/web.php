@@ -31,12 +31,16 @@ Route::middleware(['auth'])->group(function() {
         return view('dashboard')->with('exams', $myExams);
     })->name('dashboard');
 });
+
+
 Route::resource( 'exams', ExamController::class);
 
 Route::resource( 'exams.questions', QuestionController::class);
 
 Route::resource('exams.attendances', AttendanceController::class);
 Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
+
+Route::get( '/exams/{exam}/exportcsv', [ExamController::class, 'exportCsv'])->name('exportCsv');
 
 
 require __DIR__.'/auth.php';

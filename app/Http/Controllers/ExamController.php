@@ -107,4 +107,51 @@ class ExamController extends Controller
 //        return redirect()->route('dashboard');
     }
 
+
+    /**
+     * Exports exam into csv
+     */
+    public function exportCsv(Exam $exam) {
+        $fileName = $exam->exam_code . '.csv';
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $attendances = $exam->attendances;
+        $columns = ['AisID', 'Meno', 'Priezvisko', 'Body'];
+
+
+
+        $callback = function() use($attendances, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($attendances as $attendance) {
+                $row['AisID']  = $attendance->ais_id;
+                $row['Meno']    = $attendance->first_name;
+                $row['Priezvisko']    = $attendance->last_name;
+                // TODO - zmenit na implicitne hodnoty
+                $row['Body']    = 20;
+
+
+                fputcsv($file, [
+                    $row['AisID'],
+                    $row['Meno'],
+                    $row['Priezvisko'],
+                    $row['Body']
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+
+    }
+
 }
