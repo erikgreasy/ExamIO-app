@@ -23,7 +23,7 @@
 
         <div class="container mx-auto px-6 md:px-12 relative z-10 flex justify-center  flex-wrap items-center py-24 xl:py-40">
             <div class="text-center text-white">
-                <h1 class="text-7xl mb-10">Test so zadaným kódom nexistuje</h1>
+                <h1 class="text-7xl mb-10">{{$error_message}}</h1>
                 <a href="{{ route('home') }}" class="my-5 bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Návrat na domovskú stránku</a>
    
             </div>

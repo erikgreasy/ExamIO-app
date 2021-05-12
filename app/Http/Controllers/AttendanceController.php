@@ -36,7 +36,10 @@ class AttendanceController extends Controller
         $exam = Exam::where('exam_code', $code)->first();
 
         if (!$exam) {
-            return view('exams.notfound');
+            return view('exams.notfound',['error_message' => "Test so zadaným kódom nexistuje."]);
+        }
+        else if(!$exam->active){
+            return view('exams.notfound',['error_message' => "Váš test ešte nebol spustený."]);
         }
 
         return view('attendances.create', [
@@ -102,10 +105,8 @@ class AttendanceController extends Controller
 
     }
 
-    public function correction(Answer $answer)
-    {
-        Answer::where('id', $answer->id)->update(['is_correct' => !$answer->is_correct]);
-
+    public function correction(Answer $answer){
+        Answer::where('id',$answer->id)->update(['is_correct'=>!$answer->is_correct]);
         return back();
     }
 
