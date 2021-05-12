@@ -18,9 +18,7 @@ use App\Http\Controllers\ExamProcessController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::view('/', 'welcome')->name('home');
 
 Route::middleware(['auth'])->group(function() {
     Route::resource('exams.questions', QuestionController::class);
