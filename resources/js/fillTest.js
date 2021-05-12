@@ -74,6 +74,16 @@ window.redoSketch = function(id) {
     
 }
 
+$('.equation').on('input',function(ev) {
+    $(this).parent().find('input').val(ev.target.value);
+    //todo - aky format outputu chceme: .value je .getValue() bez argumentu - https://cortexjs.io/mathlive/guides/interacting/ 
+    // console.log($(this).parent().find('input').value);
+});
+
+$('.sketchpad').on('mouseout', function() {
+    $(this).parent().find('input').val($(this)[0].toDataURL());
+});
+
 
 
  /*function getPosition(mouseEvent, sigCanvas) {
