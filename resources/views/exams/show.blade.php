@@ -14,7 +14,7 @@
                 {{ $exam->description }}
             </div>
 
-            <form action="{{ route('exams.attendances.update', [$exam, $attendance]) }}" method="POST">
+            <form action="{{ route('exams.attendances.update', [$exam, $attendance]) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="flex flex-col" id="exam">
