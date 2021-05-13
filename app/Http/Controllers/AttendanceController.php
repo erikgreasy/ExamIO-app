@@ -6,9 +6,11 @@ use App\Models\Exam;
 use App\Models\Answer;
 use App\Models\Attendance;
 use App\Models\PairAnswer;
+use App\Models\SelectOption;
 use Illuminate\Http\Request;
 use App\Models\LeftPairOption;
 use App\Models\RightPairOption;
+use Illuminate\Support\Facades\Storage;
 
 class AttendanceController extends Controller
 {
@@ -35,7 +37,9 @@ class AttendanceController extends Controller
         $exam = Exam::where('exam_code', $code)->first();
 
         if (!$exam) {
-            return view('exams.notfound');
+            return view('exams.notfound', ['error_message' => "Test so zadaným kódom nexistuje."]);
+        } else if (!$exam->active) {
+            return view('exams.notfound', ['error_message' => "Váš test ešte nebol spustený."]);
         }
 
         return view('attendances.create', [
@@ -98,7 +102,15 @@ class AttendanceController extends Controller
     public function edit(Attendance $attendance)
     {
         //
+
     }
+
+    public function correction(Answer $answer)
+    {
+        Answer::where('id', $answer->id)->update(['is_correct' => !$answer->is_correct]);
+        return back();
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -110,75 +122,123 @@ class AttendanceController extends Controller
     public function update(Request $request, Exam $exam, Attendance $attendance)
     {
         $request->validate([
-            'question_answer'   => 'required',
+            'question_answer' => 'required',
         ]);
+        // dd($request->question_answer);
+
+        Attendance::where('id', $attendance->id)->update(['active' => false]);
 
         foreach ($exam->questions as $index => $question) {
             $questionType = $question->questionType->full_name;
-            $questioAnswer = $request->question_answer[$index];
+            $questionAnswer = $request->question_answer[$index];
 
             if ($questionType == "Krátka odpoveď") {
+                $rightAnswer = Answer::where('question_id', $question->id)->where('attendance_id', NULL)->get()->first()->text;
+                $is_correct = ($rightAnswer == $questionAnswer);
+
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
-                    'text'              => $questioAnswer,
+                    'text'              => $questionAnswer,
                     'img_path'          => null,
                     'select_option_id'  => null,
-                    'is_correct'        => false,
+                    'is_correct'        => $is_correct,
                 ]);
             } else if ($questionType == "Výber odpovede") {
+                $rightAnswer = SelectOption::where('question_id', $question->id)->where('is_correct', true)->get()->first()->text;
+                $questionAnswer = SelectOption::find($questionAnswer)->id;
+
+                $is_correct = ($rightAnswer == $questionAnswer);
+
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
                     'text'              => null,
                     'img_path'          => null,
-                    'select_option_id'  => $questioAnswer,
-                    'is_correct'        => false,
+                    'select_option_id'  => $questionAnswer,
+                    'is_correct'        => $is_correct,
                 ]);
             } else if ($questionType == "Párovanie odpovedí") {
-                // $answer = Answer::create([
-                //     'attendance_id'     => $attendance->id,
-                //     'question_id'       => $question->id,
-                //     'text'              => null,
-                //     'img_path'          => null,
-                //     'select_option_id'  => null,
-                //     'is_correct'        => false,
-                // ]);
+                $answer = Answer::create([
+                    'attendance_id'     => $attendance->id,
+                    'question_id'       => $question->id,
+                    'text'              => null,
+                    'img_path'          => null,
+                    'select_option_id'  => null,
+                    'is_correct'        => true,
+                ]);
 
-                // $pairAnswer = PairAnswer::create([
-                //     'answer_id'     => $answer->id,
-                //     'question_id'   => $question->id,
-                // ]);
-                
-                // LeftPairOption::create([
-                //     'text'          => $option['left'],
-                //     'pair_answer_id'=> $pairAnswer->id,
-                //     'question_id'   => $question->id
-                // ]);
+                $is_correct = true;
+                foreach ($questionAnswer as $leftVal => $rightVal) {
+                    $pairAnswer = PairAnswer::create([
+                        'answer_id'     => $answer->id,
+                        'question_id'   => $question->id,
+                    ]);
 
-                // RightPairOption::create([
-                //     'text'          => $option['right'],
-                //     'pair_answer_id'=> $pairAnswer->id,
-                //     'question_id'   => $question->id
-                // ]);
+                    LeftPairOption::create([
+                        'text'          => $leftVal,
+                        'pair_answer_id' => $pairAnswer->id,
+                        'question_id'   => $question->id
+                    ]);
+                    RightPairOption::create([
+                        'text'          => $rightVal,
+                        'pair_answer_id' => $pairAnswer->id,
+                        'question_id'   => $question->id
+                    ]);
+
+                    if (!($leftVal == $rightVal)) {
+                        $is_correct = false;
+                    }
+                }
+
+                $answer->is_correct = $is_correct;
+                $answer->save();
             } else if ($questionType == "Nakreslenie obrázku") {
-                // Answer::create([
-                //     'attendance_id'     => $attendance->id,
-                //     'question_id'       => $question->id,
-                //     'text'              => null,
-                //     'img_path'          => $questioAnswer,
-                //     'select_option_id'  => null,
-                //     'is_correct'        => false,
-                // ]);
+                if (!isset($questionAnswer->file)) {
+                    $file = $questionAnswer["canvas"];
+                    $answer = Answer::create([
+                        'attendance_id'     => $attendance->id,
+                        'question_id'       => $question->id,
+                        'text'              => null,
+                        'img_path'          => null,
+                        'canvas'            => $file,
+                        'select_option_id'  => null,
+                        'is_correct'        => false,
+                    ]);
+                } else {
+                    $file = $questionAnswer["file"];
+                    $path = '/storage/' . Storage::putFile('files', $file);
+                    Answer::create([
+                        'attendance_id'     => $attendance->id,
+                        'question_id'       => $question->id,
+                        'text'              => $questionAnswer,
+                        'img_path'          => $path,
+                        'select_option_id'  => null,
+                        'is_correct'        => false,
+                    ]);
+                }
             } else if ($questionType == "Napísanie matematického výrazu") {
-                // Answer::create([
-                //     'attendance_id'     => $attendance->id,
-                //     'question_id'       => $question->id,
-                //     'text'              => $questioAnswer,
-                //     'img_path'          => null,
-                //     'select_option_id'  => null,
-                //     'is_correct'        => false,
-                // ]);
+                if ( !isset($questionAnswer->file) ) {
+                    Answer::create([
+                        'attendance_id'     => $attendance->id,
+                        'question_id'       => $question->id,
+                        'text'              => $questionAnswer['equation'],
+                        'img_path'          => null,
+                        'select_option_id'  => null,
+                        'is_correct'        => false,
+                    ]);
+                } else {
+                    $file = $questionAnswer["file"];
+                    $path = '/storage/' . Storage::putFile('files', $file);
+                    Answer::create([
+                        'attendance_id'     => $attendance->id,
+                        'question_id'       => $question->id,
+                        'text'              => null,
+                        'img_path'          => $path,
+                        'select_option_id'  => null,
+                        'is_correct'        => false,
+                    ]);
+                }
             }
         }
 

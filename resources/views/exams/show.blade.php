@@ -14,14 +14,14 @@
                 {{ $exam->description }}
             </div>
 
-            <form action="{{ route('exams.attendances.update', [$exam, $attendance]) }}" method="POST">
+            <form action="{{ route('exams.attendances.update', [$exam, $attendance]) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                <div class="flex flex-col">
+                <div class="flex flex-col" id="exam">
                     @foreach ($exam->questions as $index => $question)
                         <div class="py-5">
                             <h2 class="text-2xl">
-                                {{ ++$index }}. {{ $question->text }}
+                                {{ $index+1 }}. {{ $question->text }}
                             </h2>
                             @switch($question->questionType->full_name)
                                 @case('Krátka odpoveď')
@@ -33,7 +33,7 @@
                                 @case('Výber odpovede')
                                     (Vyberte možnosť)
                                     <div>
-                                        <select id="" name="question_answer[]">
+                                        <select name="question_answer[]">
                                             @foreach ($question->selectOptions as $option)
                                                 <option value="{{ $option->id }}">
                                                     {{ $option->text }}
@@ -43,22 +43,101 @@
                                     </div>
                                 @break
                                 @case('Párovanie odpovedí')
-                                    (Párovanie odpovedí)
-                                    <div>
-                                        <input type="text" name="question_answer[]" value="todo">
+                                    ({{ 'Párovanie odpovedí' }})
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <div class="grid grid-cols-2 gap-1">
+                                                @foreach ($question->leftPairOptions as $loption)
+                                                    <div>
+                                                        <p id="{{ $loption->id }}">
+                                                            {{ $loption->text }}
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <input id="input_{{ $loption->id }}" class="drop"
+                                                            style="border: 4px solid black; border-radius: 6px;">
+                                                        <input type="hidden" id="hinput_{{ $loption->id }}"
+                                                            name="question_answer[{{ $index }}][{{ $loption->id }}]">
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            @foreach ($question->rightPairOptions as $roption)
+                                                <span id="r{{ $roption->id }}" class="drag">
+                                                    {{ $roption->text }}
+                                                </span>
+                                                <br>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 @break
                                 @case('Nakreslenie obrázku')
-                                    (Nakreslenie obrázku)
-                                    <div>
-                                        <input type="text" name="question_answer[]" value="todo">
+                                    ({{ 'Nakreslenie obrázku' }})
+                                    <div class="form-check question_{{ $index }}">
+                                        <input class="form-check-input question_{{ $index }}" type="radio"
+                                            name="flexRadioDefault_question_{{ $index }}"
+                                            id="pic_question_{{ $index }}" onchange="fileOrInput(this.id)">
+                                        <label class="form-check-label" for="pic_question_{{ $index }}">
+                                            Pridať obrázok
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input question_{{ $index }}" type="radio"
+                                            name="flexRadioDefault_question_{{ $index }}"
+                                            id="drw_question_{{ $index }}" onchange="fileOrInput(this.id)" checked>
+                                        <label class="form-check-label" for="drw_question_{{ $index }}">
+                                            Nakresliť obrázok
+                                        </label>
+                                    </div>
+                                    <div class="form-group question_{{ $index }}"
+                                        id="file_selected_question_{{ $index }}" style="display: none;">
+                                        <input type="file" class="form-control-file" id="file_question_{{ $index }}" name="question_answer[{{ $index }}][file]">
+
+                                    </div>
+                                    <div class="form-group question_{{ $index }}"
+                                        id="draw_selected_question_{{ $index }}" style="display: block;">
+                                        <canvas class="sketchpad" id="sketchpad_question_{{ $index }}"
+                                            style="border: 3px solid;"> </canvas>
+                                        <input type="hidden" name="question_answer[{{ $index }}][canvas]">
+                                        <!--
+                                        <button class="btn btn-primary" id="undo_question_{{ $index }}" onclick="undoSketch(this.id)"> undo </button>
+                                        <button class="btn btn-primary" id="redo_question_{{ $index }}" onclick="redoSketch(this.id)"> rendo </button>
+                                        -->
                                     </div>
                                 @break
                                 @case('Napísanie matematického výrazu')
-                                    (Napísanie matematického výrazu)
-                                    <div>
-                                        <input type="text" name="question_answer[]" value="todo">
+                                    ({{ 'Napísanie matematického výrazu' }})
+                                    <div class="form-check question_{{ $index }}">
+                                        <input class="form-check-input question_{{ $index }}" type="radio"
+                                            name="flexRadioDefault_question_{{ $index }}"
+                                            id="pic_question_{{ $index }}" onchange="fileOrInput(this.id)">
+                                        <label class="form-check-label" for="pic_question_{{ $index }}">
+                                            Pridať obrázok
+                                        </label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input question_{{ $index }}" type="radio"
+                                            name="flexRadioDefault_question_{{ $index }}"
+                                            id="drw_question_{{ $index }}" onchange="fileOrInput(this.id)" checked>
+                                        <label class="form-check-label" for="drw_question_{{ $index }}">
+                                            Napísať vzorec
+                                        </label>
+                                    </div>
+                                    <div class="form-group question_{{ $index }}"
+                                        id="file_selected_question_{{ $index }}" style="display: none;">
+                                        <input type="file" class="form-control-file" id="file_question_{{ $index }}" name="question_answer[{{ $index }}][file]">
+                                    </div>
+                                    <div class="form-group question_{{ $index }}"
+                                        id="draw_selected_question_{{ $index }}" style="display: block;">
+                                        <math-field virtual-keyboard-mode="manual" class="equation" id="equation_question_{{ $index }}">
+                                            f(x)=</math-field>
+                                        <input type="hidden" name="question_answer[{{ $index }}][equation]">
+                                    </div>
+                                    <!--
+                                    <button onclick="logconsole()" > BUTTON </button>
+                                    -->
                                 @break
                                 @default
 

@@ -18,9 +18,7 @@ use App\Http\Controllers\ExamProcessController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::view('/', 'welcome')->name('home');
 
 Route::middleware(['auth'])->group(function() {
     Route::resource('exams.questions', QuestionController::class);
@@ -44,6 +42,8 @@ Route::resource( 'exams.questions', QuestionController::class);
 
 Route::resource('exams.attendances', AttendanceController::class);
 Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
+Route::get('/answers/{answer}/correction',[AttendanceController::class,'correction'])->name('correction');
+
 
 Route::get( '/user/{user}/exams', [ExamController::class, 'getActiveExams'])->name('user.exams');
 Route::get('/exams/{exam}/attendance/{attendance}', [ExamController::class, 'fireEvent'])->name('exams.event');

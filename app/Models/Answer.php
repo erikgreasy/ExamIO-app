@@ -24,6 +24,7 @@ class Answer extends Model
         'question_id',
         'text',
         'img_path',
+        'canvas',
         'select_option_id',
         'is_correct',
     ];

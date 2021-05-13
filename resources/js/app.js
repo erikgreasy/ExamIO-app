@@ -6,6 +6,16 @@ require('alpinejs');
 
 require('./question');
 
+require('mathlive');
+
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
+import 'jquery-ui/ui/widgets/draggable.js';
+
+import 'jquery-ui/ui/widgets/droppable.js';
+
+require('./fillTest');
 
 // pokial mam auth usera tak to znamena ze som na exams.watch blade
 if( window.auth_user ) {
@@ -25,3 +35,4 @@ if( window.auth_user ) {
             
         })
 }
+
