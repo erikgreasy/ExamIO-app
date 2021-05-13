@@ -45,7 +45,8 @@
                 <div>
                     <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exams.attendances.index', $exam) }}">Zobraziť vypracovania</a>
                     <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exams.edit', $exam) }}">Upraviť</a>
-                    <a class="bg-yellow-400 hover:bg-yellow-200 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exportCsv', $exam) }}">Export do csv</a>
+                    <a class="bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exportCsv', $exam) }}">Export do csv</a>
+                    <a class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-1 my-2 px-4 rounded" href="#">Export do pdf</a>
 
                 </div>
             </div>

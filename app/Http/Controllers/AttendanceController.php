@@ -170,6 +170,8 @@ class AttendanceController extends Controller
 
                 $is_correct = true;
                 foreach ($questionAnswer as $leftVal => $rightVal) {
+                    $leftVal = LeftPairOption::find($leftVal)->text;
+                    $rightVal = RightPairOption::find($rightVal)->text;
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
                         'question_id'   => $question->id,
@@ -190,6 +192,7 @@ class AttendanceController extends Controller
                         $is_correct = false;
                     }
                 }
+                dd($questionAnswer);
 
                 $answer->is_correct = $is_correct;
                 $answer->save();
