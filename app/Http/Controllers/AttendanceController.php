@@ -147,7 +147,7 @@ class AttendanceController extends Controller
         ]);
 
         Attendance::where('id', $attendance->id)->update(['active' => false]);
-        //$att = Attendance::where('id', $attendance->id)->get()->first();
+        // dd($request->all());
         
         $points = $attendance->points;
 
@@ -158,7 +158,7 @@ class AttendanceController extends Controller
             if ($questionType == "Krátka odpoveď") {
                 $correctAnswer = Answer::where('question_id', $question->id)->where('attendance_id', NULL)->get()->first()->text;
                 $is_correct = ($correctAnswer == $questionAnswer);
-                if($is_correct)$points++;
+                if($is_correct) $points++;
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
@@ -191,10 +191,11 @@ class AttendanceController extends Controller
                     'is_correct'        => true,
                 ]);
 
-                $is_correct = true;$pairCorrect = true;
+                $is_correct = true;
+                $pairCorrect = true;
                 foreach ($questionAnswer as $leftId => $rightId) {
                     $leftVal = LeftPairOption::find($leftId)->text;
-                    $rightVal = RightPairOption::find($rightId)->text;
+                    $rightVal = ($rightId != null) ? RightPairOption::find($rightId)->text : null;
 
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
@@ -204,12 +205,12 @@ class AttendanceController extends Controller
 
                     LeftPairOption::create([
                         'text'          => $leftVal,
-                        'pair_answer_id' => $pairAnswer->id,
+                        'pair_answer_id'=> $pairAnswer->id,
                         'question_id'   => $question->id
                     ]);
                     RightPairOption::create([
                         'text'          => $rightVal,
-                        'pair_answer_id' => $pairAnswer->id,
+                        'pair_answer_id'=> $pairAnswer->id,
                         'question_id'   => $question->id
                     ]);
 
@@ -224,8 +225,7 @@ class AttendanceController extends Controller
                     $pairAnswer->save();
                     
                 }
-                //dd($pairAnswer);
-                if($is_correct)$points++;
+                if($is_correct) $points++;
                 $answer->is_correct = $is_correct;
                 $answer->save();
             } else if ($questionType == "Nakreslenie obrázku") {
