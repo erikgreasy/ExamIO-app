@@ -206,6 +206,7 @@
                 <a href="#" class="text-white mx-2">Prihlásenie</a>
                 <a href="#" class="text-white mx-2">Registrácia</a>
                 <a href="#" class="text-white mx-2">Moje testy</a>
+                <a href="#" class="text-white mx-2">Rozdelenie úloh </a>
                 <a href="#" class="text-white mx-2">Zdroje</a>
             </div>
         </div>
