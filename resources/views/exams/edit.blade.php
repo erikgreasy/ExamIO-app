@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@can('view',$exam)
 <section class="py-10 px-6">
     <div class="max-w-7xl h-full px-6 py-16 mx-auto bg-gray-100 mt-10">
         <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight mt-3 text-center uppercase">Test: {{ $exam->title }} </h1><br>
@@ -60,5 +60,5 @@
         </div>
 </section>
 
-
+@endcan
 @endsection

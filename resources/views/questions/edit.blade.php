@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@can('view',$question)
     <!-- div that will pop up when adding new question -->
     <div id="add_question_modal"
         class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-custom-blue_dark">
@@ -157,5 +157,5 @@
 
         </div>
     </div>
-
+@endcan
 @endsection
