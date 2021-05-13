@@ -90,3 +90,4 @@ $('.sketchpad').on('mouseout', function() {
     $(this).parent().find('input').val($(this)[0].toDataURL());
 });
 
+

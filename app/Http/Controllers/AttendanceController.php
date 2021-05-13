@@ -83,17 +83,16 @@ class AttendanceController extends Controller
     public function show(Exam $exam, Attendance $attendance)
     {
         if ($attendance->active)
-            return abort(404);
+            return view('attendances.index', [
+                'exam'   => $exam
+            ]);
 
         $answers = Answer::where('attendance_id', $attendance->id)->get();
         
         $pairAnswer = [];
         foreach ($answers as $answer) {
             if ($answer->questionType->type_id == 3) {
-
-                //$pairAnswer[] = $answers->pairAnswers;
                 $pairAnswer[] = PairAnswer::where('answer_id', $answer->id)->get();
-                //dd($answer->pairAnswers->first());
             }
         }
 
@@ -147,7 +146,6 @@ class AttendanceController extends Controller
         ]);
 
         Attendance::where('id', $attendance->id)->update(['active' => false]);
-        //$att = Attendance::where('id', $attendance->id)->get()->first();
         
         $points = $attendance->points;
 
