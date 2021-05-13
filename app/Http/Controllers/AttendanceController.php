@@ -91,7 +91,7 @@ class AttendanceController extends Controller
             if($answer->questionType->type_id == 3){
     
                 //$pairAnswer[] = $answers->pairAnswers;
-                $pairAnswer[] = PairAnswer::where('answer_id',$answer->id)->get()->first();
+                $pairAnswer[] = PairAnswer::where('answer_id',$answer->id)->get();
                 //dd($answer->pairAnswers->first());
             }
            
@@ -136,7 +136,6 @@ class AttendanceController extends Controller
         $request->validate([
             'question_answer' => 'required',
         ]);
-        // dd($request->question_answer);
 
         Attendance::where('id', $attendance->id)->update(['active' => false]);
 
@@ -158,16 +157,22 @@ class AttendanceController extends Controller
                 ]);
             } else if ($questionType == "Výber odpovede") {
                 $correctAnswer = SelectOption::where('question_id', $question->id)->where('is_correct', true)->get()->first()->text;
+<<<<<<< HEAD
                 $questionAnswer = SelectOption::find($questionAnswer)->id;
 
                 $is_correct = ($correctAnswer == $questionAnswer);
+=======
+                $questionAnswer = SelectOption::find($questionAnswer);
+>>>>>>> master
 
+                $is_correct = ($correctAnswer == $questionAnswer->text);
+                
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
                     'text'              => null,
                     'img_path'          => null,
-                    'select_option_id'  => $questionAnswer,
+                    'select_option_id'  => $questionAnswer->id,
                     'is_correct'        => $is_correct,
                 ]);
             } else if ($questionType == "Párovanie odpovedí") {
@@ -181,10 +186,17 @@ class AttendanceController extends Controller
                 ]);
 
                 $is_correct = true;
+<<<<<<< HEAD
                 foreach ($questionAnswer as $leftVal => $rightVal) {
                     $leftVal = LeftPairOption::find($leftVal)->text;
                     $rightVal = RightPairOption::find($rightVal)->text;
                     
+=======
+                foreach ($questionAnswer as $leftId => $rightId) {
+                    $leftVal = LeftPairOption::find($leftId)->text;
+                    $rightVal = RightPairOption::find($rightId)->text;
+
+>>>>>>> master
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
                         'question_id'   => $question->id,
@@ -201,10 +213,11 @@ class AttendanceController extends Controller
                         'question_id'   => $question->id
                     ]);
 
-                    if (!($leftVal == $rightVal)) {
+                    if (!($leftId == $rightId)) {
                         $is_correct = false;
                     }
                 }
+
                 $answer->is_correct = $is_correct;
                 $answer->save();
             } else if ($questionType == "Nakreslenie obrázku") {
