@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="py-10 px-6 bg-custom-blue_dark">
+    <section class="py-10 px-6">
         <div class="max-w-7xl px-6 py-16 mx-auto bg-gray-100 mt-10">
             <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight my-4 text-center uppercase">Test:
                 {{ $exam->title }} </h1><br>
@@ -45,12 +45,12 @@
                                 @break
                                 @case('Párovanie odpovedí')
                                     ({{ 'Párovanie odpovedí' }})
-                                    <div class="grid grid-cols-2 gap-4">
+                                    <div class="grid grid-cols-2 gap-4 my-2 mx-2">
                                         <div>
                                             <div class="grid grid-cols-2 gap-1">
                                                 @foreach ($question->leftPairOptions as $loption)
                                                     <div>
-                                                        <p id="{{ $loption->id }}">
+                                                        <p id="{{ $loption->id }}" class="font-bold">
                                                             {{ $loption->text }}
                                                         </p>
                                                     </div>
@@ -66,7 +66,7 @@
 
                                         <div>
                                             @foreach ($question->rightPairOptions as $roption)
-                                                <span id="r{{ $roption->id }}" class="drag">
+                                                <span id="r{{ $roption->id }}" class="drag font-bold px-2">
                                                     {{ $roption->text }}
                                                 </span>
                                                 <br>
@@ -167,9 +167,9 @@
         function sendNotification() {
             fetch('/exams/' + examId + '/attendance/' + attendanceId)
         }
-        
+
         document.addEventListener("visibilitychange", onVisibilityChange);
-        
+
     </script>
-    
+
 @endsection
