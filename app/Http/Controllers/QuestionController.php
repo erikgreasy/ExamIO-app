@@ -127,13 +127,15 @@ class QuestionController extends Controller
                 LeftPairOption::create([
                     'text'          => $option['left'],
                     'pair_answer_id'=> $pairAnswer->id,
-                    'question_id'   => $question->id
+                    'question_id'   => $question->id,
+                    'is_original'   => true
                 ]);
 
                 RightPairOption::create([
                     'text'          => $option['right'],
                     'pair_answer_id'=> $pairAnswer->id,
-                    'question_id'   => $question->id
+                    'question_id'   => $question->id,
+                    'is_original'   => true
                 ]);
             }
         } else if ($request->question_type == "image_question") {

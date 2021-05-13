@@ -22,6 +22,7 @@ class RightPairOption extends Model
         'text',
         'question_id',
         'pair_answer_id',
+        'is_original'
     ];
 
     /**

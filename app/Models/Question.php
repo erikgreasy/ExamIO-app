@@ -56,7 +56,7 @@ class Question extends Model
      */
     public function rightPairOptions(): HasMany
     {
-        return $this->hasMany(RightPairOption::class);
+        return $this->hasMany(RightPairOption::class)->where('is_original',true);
     }
 
     /**
@@ -66,6 +66,6 @@ class Question extends Model
      */
     public function leftPairOptions(): HasMany
     {
-        return $this->hasMany(LeftPairOption::class);
+        return $this->hasMany(LeftPairOption::class)->where('is_original',true);
     }
 }

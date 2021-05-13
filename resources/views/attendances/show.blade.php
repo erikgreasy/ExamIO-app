@@ -9,7 +9,7 @@
                 
                 <div class="text-xl font-semibold mb-3 ">Meno: {{$attendance->first_name . " " . $attendance->last_name}} <br>AIS : {{$attendance->ais_id}}</div>
                 
-                <?php $pos = 1; $points = 0; $fullPoints = 0;?>
+                <?php $pos = 1; $points = 0; $fullPoints = 0; $index = 0;?>
                 <hr>
                 @foreach($answers as $answer)
                     <div>
@@ -39,6 +39,77 @@
                                     @case(2)
                                         (Vyberte možnosť)
                                         <div class="text-lg ml-5 w-1/3">{{$answer->selectOption->text}}</div>
+                                            <div class="text-right -mt-7 p-0 m-0">
+                                                @if ($answer->is_correct)
+                                                    <div class="text-black">
+                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>
+                                                        <a href="{{ route('correction', [$answer]) }}">Zmeniť hodnotenie.</a>
+                                                    </div>
+                                                    <?php $points++; $fullPoints++; ?>
+                                                @else
+                                                    <div class="text-black">
+                                                        <p class=" text-red-500 font-semibold">Nesprávna odpoveď</p>
+                                                        <a href="{{ route('correction', [$answer]) }}">Zmeniť hodnotenie.</a>
+                                                        <?php $fullPoints++; ?>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        
+                                    @break
+
+                                    @case(3)
+                                        (Párovanie odpovedí)
+                                            
+                                            @foreach($pairAnswer[$index] as $pAnswer)
+                                                <div class="text-lg ml-5 w-1/3"> {{ $pAnswer->leftPairOption->text ." ". $pAnswer->rightPairOption->text }}</div>
+                                                
+                                                
+                                            @endforeach
+                                            <?php $index++;?>
+                                            
+                                        
+                                            <div class="text-right -mt-7 p-0 m-0">
+                                                @if ($answer->is_correct)
+                                                    <div class="text-black">
+                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>
+                                                        <a href="{{ route('correction', [$answer]) }}">Zmeniť hodnotenie.</a>
+                                                    </div>
+                                                    <?php $points++; $fullPoints++; ?>
+                                                @else
+                                                    <div class="text-black">
+                                                        <p class=" text-red-500 font-semibold">Nesprávna odpoveď</p>
+                                                        <a href="{{ route('correction', [$answer]) }}">Zmeniť hodnotenie.</a>
+                                                        <?php $fullPoints++; ?>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        
+                                    @break
+
+                                    @case(4)
+                                        (Nakreslenie obrázku)
+                                        <div class="text-lg ml-5 w-1/3"><img src="{{$answer->canvas}}"></div>
+                                            <div class="text-right -mt-7 p-0 m-0">
+                                                @if ($answer->is_correct)
+                                                    <div class="text-black">
+                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>
+                                                        <a href="{{ route('correction', [$answer]) }}">Zmeniť hodnotenie.</a>
+                                                    </div>
+                                                    <?php $points++; $fullPoints++; ?>
+                                                @else
+                                                    <div class="text-black">
+                                                        <p class=" text-red-500 font-semibold">Nesprávna odpoveď</p>
+                                                        <a href="{{ route('correction', [$answer]) }}">Zmeniť hodnotenie.</a>
+                                                        <?php $fullPoints++; ?>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        
+                                    @break
+
+                                    @case(5)
+                                        (Napísanie matematického výrazu)
+                                        <div class="text-lg ml-5 w-1/3">{{$answer->text}}</div>
                                             <div class="text-right -mt-7 p-0 m-0">
                                                 @if ($answer->is_correct)
                                                     <div class="text-black">
