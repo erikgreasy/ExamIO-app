@@ -152,8 +152,8 @@ class AttendanceController extends Controller
             $questionAnswer = $request->question_answer[$index];
 
             if ($questionType == "Krátka odpoveď") {
-                $rightAnswer = Answer::where('question_id', $question->id)->where('attendance_id', NULL)->get()->first()->text;
-                $is_correct = ($rightAnswer == $questionAnswer);
+                $correctAnswer = Answer::where('question_id', $question->id)->where('attendance_id', NULL)->get()->first()->text;
+                $is_correct = ($correctAnswer == $questionAnswer);
 
                 Answer::create([
                     'attendance_id'     => $attendance->id,
@@ -164,10 +164,10 @@ class AttendanceController extends Controller
                     'is_correct'        => $is_correct,
                 ]);
             } else if ($questionType == "Výber odpovede") {
-                $rightAnswer = SelectOption::where('question_id', $question->id)->where('is_correct', true)->get()->first()->text;
+                $correctAnswer = SelectOption::where('question_id', $question->id)->where('is_correct', true)->get()->first()->text;
                 $questionAnswer = SelectOption::find($questionAnswer)->id;
 
-                $is_correct = ($rightAnswer == $questionAnswer);
+                $is_correct = ($correctAnswer == $questionAnswer);
 
                 Answer::create([
                     'attendance_id'     => $attendance->id,
