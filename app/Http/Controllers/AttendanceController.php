@@ -96,7 +96,7 @@ class AttendanceController extends Controller
             if($answer->questionType->type_id == 3){
     
                 //$pairAnswer[] = $answers->pairAnswers;
-                $pairAnswer[] = PairAnswer::where('answer_id',$answer->id)->get()->first();
+                $pairAnswer[] = PairAnswer::where('answer_id',$answer->id)->get();
                 //dd($answer->pairAnswers->first());
             }
            

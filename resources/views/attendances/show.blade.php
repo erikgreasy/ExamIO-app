@@ -9,7 +9,7 @@
                 
                 <div class="text-xl font-semibold mb-3 ">Meno: {{$attendance->first_name . " " . $attendance->last_name}} <br>AIS : {{$attendance->ais_id}}</div>
                 
-                <?php $pos = 1; $points = 0; $fullPoints = 0;?>
+                <?php $pos = 1; $points = 0; $fullPoints = 0; $index = 0;?>
                 <hr>
                 @foreach($answers as $answer)
                     <div>
@@ -59,12 +59,13 @@
 
                                     @case(3)
                                         (Párovanie odpovedí)
-                                        
-                                            @foreach($pairAnswer as $pAnswer)
-                                                <div class="text-lg ml-5 w-1/3"> {{ $pAnswer->rightPairOption }}</div>
-
-                                            @endforeach
                                             
+                                            @foreach($pairAnswer[$index] as $pAnswer)
+                                                <div class="text-lg ml-5 w-1/3"> {{ $pAnswer->leftPairOption->text ." ". $pAnswer->rightPairOption->text }}</div>
+                                                <p><?php echo $index;?></p>
+                                                
+                                            @endforeach
+                                            <?php $index++;?>
                                             
                                         
                                             <div class="text-right -mt-7 p-0 m-0">
