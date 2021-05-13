@@ -34,11 +34,11 @@
                     @switch($answer->questionType->type_id)
                         @case(1)
                             (Zadajte slovnú odpoveď)
-                            <div>{{ $answer->text }}</div>
+                            <div>Odpoveď študenta: {{ $answer->text }}</div>
                             <div>
                                 @if ($answer->is_correct)
                                     <div>
-                                        <p>Správna odpoveď</p>
+                                        <p>Vyhodnotenie: Správna odpoveď</p>
                                     </div>
                                     <?php
                                     $points++;
@@ -46,7 +46,7 @@
                                     ?>
                                 @else
                                     <div>
-                                        <p>Nesprávna odpoveď</p>
+                                        <p>Vyhodnotenie: Nesprávna odpoveď</p>
                                     </div>
                                     <?php $fullPoints++; ?>
                                 @endif
@@ -56,11 +56,11 @@
 
                         @case(2)
                             (Vyberte možnosť)
-                            <div>{{ $answer->selectOption->text }}</div>
+                            <div>Odpoveď študenta: {{ $answer->selectOption->text }}</div>
                             <div>
                                 @if ($answer->is_correct)
                                     <div>
-                                        <p>Správna odpoveď</p>
+                                        <p>Vyhodnotenie: Správna odpoveď</p>
                                     </div>
                                     <?php
                                     $points++;
@@ -68,7 +68,7 @@
                                     ?>
                                 @else
                                     <div>
-                                        <p>Nesprávna odpoveď</p>
+                                        <p>Vyhodnotenie: Nesprávna odpoveď</p>
                                         <?php $fullPoints++; ?>
                                     </div>
                                 @endif
@@ -78,7 +78,7 @@
 
                         @case(3)
                             (Párovanie odpovedí)
-
+                            Odpoveď študenta: 
                             @foreach ($pairAnswer[$index] as $pAnswer)
                                 <div>
                                     {{ $pAnswer->leftPairOption->text . ' => ' . $pAnswer->rightPairOption->text }}
@@ -90,7 +90,7 @@
                             <div>
                                 @if ($answer->is_correct)
                                     <div>
-                                        <p>Správna odpoveď</p>
+                                        <p>Vyhodnotenie: Správna odpoveď</p>
                                     </div>
                                     <?php
                                     $points++;
@@ -98,7 +98,7 @@
                                     ?>
                                 @else
                                     <div>
-                                        <p>Nesprávna odpoveď</p>
+                                        <p>Vyhodnotenie: Nesprávna odpoveď</p>
                                         <?php $fullPoints++; ?>
                                     </div>
                                 @endif
@@ -108,11 +108,11 @@
 
                         @case(4)
                             (Nakreslenie obrázku)
-                            <div><img src="{{ $answer->canvas }}"></div>
+                            <div>Odpoveď študenta: <img src="{{ $answer->canvas }}"></div>
                             <div>
                                 @if ($answer->is_correct)
                                     <div>
-                                        <p>Správna odpoveď</p>
+                                        <p>Vyhodnotenie: Správna odpoveď</p>
                                     </div>
                                     <?php
                                     $points++;
@@ -120,7 +120,7 @@
                                     ?>
                                 @else
                                     <div>
-                                        <p>Nesprávna odpoveď</p>
+                                        <p>Vyhodnotenie: Nesprávna odpoveď</p>
                                         <?php $fullPoints++; ?>
                                     </div>
                                 @endif
@@ -130,11 +130,11 @@
 
                         @case(5)
                             (Napísanie matematického výrazu)
-                            <div>{{ $answer->text }}</div>
+                            <div>Odpoveď študenta: {{ $answer->text }}</div>
                             <div>
                                 @if ($answer->is_correct)
                                     <div>
-                                        <p>Správna odpoveď</p>
+                                        <p>Vyhodnotenie: Správna odpoveď</p>
                                     </div>
                                     <?php
                                     $points++;
@@ -142,7 +142,7 @@
                                     ?>
                                 @else
                                     <div>
-                                        <p>Nesprávna odpoveď</p>
+                                        <p>Vyhodnotenie: Nesprávna odpoveď</p>
                                         <?php $fullPoints++; ?>
                                     </div>
                                 @endif
