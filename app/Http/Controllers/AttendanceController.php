@@ -143,7 +143,6 @@ class AttendanceController extends Controller
         $request->validate([
             'question_answer' => 'required',
         ]);
-        // dd($request->question_answer);
 
         Attendance::where('id', $attendance->id)->update(['active' => false]);
 
@@ -169,7 +168,6 @@ class AttendanceController extends Controller
 
                 $is_correct = ($correctAnswer == $questionAnswer->text);
                 
-                dd($is_correct);
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
