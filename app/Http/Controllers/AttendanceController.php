@@ -86,11 +86,6 @@ class AttendanceController extends Controller
 
         $answers = Answer::where('attendance_id', $attendance->id)->get();
         
-
-
-
-
-
         $pairAnswer = [];
         foreach($answers as $answer){
             if($answer->questionType->type_id == 3){
@@ -102,8 +97,6 @@ class AttendanceController extends Controller
            
         }
         
-
-        //dd($pairAnswer);
         return view('attendances.show', [
             'exam'          => $exam,
             'attendance'    => $attendance,
@@ -191,6 +184,7 @@ class AttendanceController extends Controller
                 foreach ($questionAnswer as $leftVal => $rightVal) {
                     $leftVal = LeftPairOption::find($leftVal)->text;
                     $rightVal = RightPairOption::find($rightVal)->text;
+                    
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
                         'question_id'   => $question->id,
