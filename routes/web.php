@@ -30,6 +30,11 @@ Route::middleware(['auth'])->group(function() {
         $myExams = Exam::where('user_id', $userId)->get();
         return view('dashboard')->with('exams', $myExams);
     })->name('dashboard');
+
+    Route::get( '/watch-exams', [ExamController::class, 'watch'])->name('exams.watch');
+
+    // EXPORT TO CSV
+    Route::get( '/exams/{exam}/exportcsv', [ExamController::class, 'exportCsv'])->name('exportCsv');
 });
 
 
@@ -40,7 +45,8 @@ Route::resource( 'exams.questions', QuestionController::class);
 Route::resource('exams.attendances', AttendanceController::class);
 Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
 
-Route::get( '/exams/{exam}/exportcsv', [ExamController::class, 'exportCsv'])->name('exportCsv');
+Route::get( '/user/{user}/exams', [ExamController::class, 'getActiveExams'])->name('user.exams');
+Route::get('/exams/{exam}/attendance/{attendance}', [ExamController::class, 'fireEvent'])->name('exams.event');
 
 
 require __DIR__.'/auth.php';

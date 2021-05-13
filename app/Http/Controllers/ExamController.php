@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\User;
 use App\Models\Question;
-use Illuminate\Http\Request;
+use App\Models\Attendance;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Events\ExamWindowLeft;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ExamController extends Controller
 {
@@ -151,6 +155,22 @@ class ExamController extends Controller
         };
 
         return response()->stream($callback, 200, $headers);
+
+    }
+
+
+    public function watch() {
+        return view('exams.watch');
+    }
+
+    public function getActiveExams( User $user ) {
+        return response()->json($user->exams);
+    }
+
+
+    public function fireEvent(Exam $exam, Attendance $attendance) {
+        
+        event(new ExamWindowLeft($exam, $attendance));
 
     }
 

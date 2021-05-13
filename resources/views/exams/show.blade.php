@@ -74,5 +74,22 @@
 
         </div>
     </section>
+    <script>
+        var examId = {{ $exam->id }}
+        var attendanceId = {{ $attendance->id }}
 
+
+        const onVisibilityChange = () => {
+            return document.hidden
+            ? sendNotification() : '';
+        }
+
+        function sendNotification() {
+            fetch('/exams/' + examId + '/attendance/' + attendanceId)
+        }
+        
+        document.addEventListener("visibilitychange", onVisibilityChange);
+        
+    </script>
+    
 @endsection
