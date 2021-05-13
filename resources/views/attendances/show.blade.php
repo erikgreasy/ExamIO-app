@@ -59,11 +59,14 @@
 
                                     @case(3)
                                         (Párovanie odpovedí)
-                                            
+                                            <?php $pair = 1;?>
                                             @foreach($pairAnswer[$index] as $pAnswer)
-                                                <div class="text-lg ml-5 w-1/3"> {{ $pAnswer->leftPairOption->text ." ". $pAnswer->rightPairOption->text }}</div>
-                                                
-                                                
+                                                @if ($pAnswer->is_correct)
+                                                <div class="text-lg ml-5 w-1/2 text-green-500">{{$pAnswer->leftPairOption->text . " - " .$pAnswer->rightPairOption->text}} </div>  
+                                                @else
+                                                <div class="text-lg ml-5 w-1/2 text-red-500">{{$pAnswer->leftPairOption->text . " - " .$pAnswer->rightPairOption->text}} </div>  
+                                                @endif
+                                            <?php $pair++;?>  
                                             @endforeach
                                             <?php $index++;?>
                                             

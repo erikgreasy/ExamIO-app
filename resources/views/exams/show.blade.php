@@ -7,6 +7,7 @@
                 {{ $exam->title }} </h1><br>
             <b>Kod testu:</b> {{ $exam->code }} <br>
             <b>limit:</b> {{ $exam->time_limit }} <br>
+            <p id="timer"></p>
             <hr>
 
 
