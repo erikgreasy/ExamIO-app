@@ -44,7 +44,7 @@ Route::resource( 'exams.questions', QuestionController::class);
 
 Route::resource('exams.attendances', AttendanceController::class);
 Route::get('/attendances/create', [AttendanceController::class, 'create'])->name('attendances.create');
-Route::get('/answers/{answer}/correction',[AttendanceController::class,'correction'])->name('correction');
+Route::get('/answer/{answer}/attendance/{attendance}',[AttendanceController::class,'correction'])->name('correction');
 
 
 Route::get( '/user/{user}/exams', [ExamController::class, 'getActiveExams'])->name('user.exams');

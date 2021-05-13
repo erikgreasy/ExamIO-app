@@ -29,7 +29,13 @@ $(document).ready(function () {
         sketchs.push(s)
     }
 
-    
+    var seconds = 0;
+    interval = setInterval(function(){
+        document.getElementById("timer").innerHTML =seconds + " seconds";
+        seconds++;  
+    },1000);
+    document.getElementById('timer').innerHTML = "uhorky";
+    console.log("axaxa");
     
     
  });

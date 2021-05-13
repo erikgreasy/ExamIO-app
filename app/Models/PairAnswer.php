@@ -19,7 +19,8 @@ class PairAnswer extends Model
         'left_pair_option_id',
         'right_pair_option_id',
         'answer_id',
-        'question_id'
+        'question_id',
+        'is_correct'
     ];
 
     //get the left pair answer

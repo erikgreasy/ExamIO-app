@@ -86,7 +86,7 @@ class AttendanceController extends Controller
             return abort(404);
 
         $answers = Answer::where('attendance_id', $attendance->id)->get();
-
+        
         $pairAnswer = [];
         foreach ($answers as $answer) {
             if ($answer->questionType->type_id == 3) {
@@ -117,9 +117,18 @@ class AttendanceController extends Controller
 
     }
 
-    public function correction(Answer $answer)
+    public function correction( Answer $answer,Attendance $attendance)
     {
         Answer::where('id', $answer->id)->update(['is_correct' => !$answer->is_correct]);
+        
+        if(!$answer->is_correct){
+            $attendance->points = ++$attendance->points;
+        }
+        else{
+            $attendance->points = --$attendance->points;
+        }
+        
+        $attendance->save();
         return back();
     }
 
@@ -138,6 +147,9 @@ class AttendanceController extends Controller
         ]);
 
         Attendance::where('id', $attendance->id)->update(['active' => false]);
+        //$att = Attendance::where('id', $attendance->id)->get()->first();
+        
+        $points = $attendance->points;
 
         foreach ($exam->questions as $index => $question) {
             $questionType = $question->questionType->full_name;
@@ -146,7 +158,7 @@ class AttendanceController extends Controller
             if ($questionType == "Krátka odpoveď") {
                 $correctAnswer = Answer::where('question_id', $question->id)->where('attendance_id', NULL)->get()->first()->text;
                 $is_correct = ($correctAnswer == $questionAnswer);
-
+                if($is_correct)$points++;
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
@@ -160,7 +172,7 @@ class AttendanceController extends Controller
                 $questionAnswer = SelectOption::find($questionAnswer);
 
                 $is_correct = ($correctAnswer == $questionAnswer->text);
-
+                if($is_correct)$points++;
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
@@ -179,7 +191,7 @@ class AttendanceController extends Controller
                     'is_correct'        => true,
                 ]);
 
-                $is_correct = true;
+                $is_correct = true;$pairCorrect = true;
                 foreach ($questionAnswer as $leftId => $rightId) {
                     $leftVal = LeftPairOption::find($leftId)->text;
                     $rightVal = RightPairOption::find($rightId)->text;
@@ -187,6 +199,7 @@ class AttendanceController extends Controller
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
                         'question_id'   => $question->id,
+                        'is_correct'    => $is_correct
                     ]);
 
                     LeftPairOption::create([
@@ -202,9 +215,17 @@ class AttendanceController extends Controller
 
                     if (!($leftId == $rightId)) {
                         $is_correct = false;
+                        $pairCorrect = false;
                     }
+                    else{
+                        $pairCorrect = true;
+                    }
+                    $pairAnswer->is_correct = $pairCorrect;
+                    $pairAnswer->save();
+                    
                 }
-
+                //dd($pairAnswer);
+                if($is_correct)$points++;
                 $answer->is_correct = $is_correct;
                 $answer->save();
             } else if ($questionType == "Nakreslenie obrázku") {
@@ -255,7 +276,8 @@ class AttendanceController extends Controller
                 }
             }
         }
-
+        $attendance->points = $points;
+        $attendance->save();
         return redirect()->route('home');
     }
 
