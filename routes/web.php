@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function() {
 
     // EXPORT TO CSV
     Route::get( '/exams/{exam}/exportcsv', [ExamController::class, 'exportCsv'])->name('exportCsv');
+    // EXPORT TO PDF
+    Route::get( '/exams/{exam}/exportpdf', [ExamController::class, 'exportPdf'])->name('exportPdf');
 });
 
 
