@@ -19,6 +19,9 @@
                         </a>
                     </div>
                     <div>
+                        <a class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-1 my-2 px-4 rounded" href="{{ route('exportPdf', [$exam, $attendance]) }}">Export do pdf</a>
+                    </div>
+                    <div>
                         @if ($attendance->active)
                             <span class="text-green-500 font-bold w-full">
                                 Aktívny

@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Events\ExamWindowLeft;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use PDF;
 
 class ExamController extends Controller
 {

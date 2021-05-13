@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\LeftPairOption;
 use App\Models\RightPairOption;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class AttendanceController extends Controller
 {
@@ -85,18 +86,17 @@ class AttendanceController extends Controller
             return abort(404);
 
         $answers = Answer::where('attendance_id', $attendance->id)->get();
-        
+
         $pairAnswer = [];
-        foreach($answers as $answer){
-            if($answer->questionType->type_id == 3){
-    
+        foreach ($answers as $answer) {
+            if ($answer->questionType->type_id == 3) {
+
                 //$pairAnswer[] = $answers->pairAnswers;
-                $pairAnswer[] = PairAnswer::where('answer_id',$answer->id)->get();
+                $pairAnswer[] = PairAnswer::where('answer_id', $answer->id)->get();
                 //dd($answer->pairAnswers->first());
             }
-           
         }
-        
+
         return view('attendances.show', [
             'exam'          => $exam,
             'attendance'    => $attendance,
@@ -157,16 +157,10 @@ class AttendanceController extends Controller
                 ]);
             } else if ($questionType == "Výber odpovede") {
                 $correctAnswer = SelectOption::where('question_id', $question->id)->where('is_correct', true)->get()->first()->text;
-<<<<<<< HEAD
-                $questionAnswer = SelectOption::find($questionAnswer)->id;
-
-                $is_correct = ($correctAnswer == $questionAnswer);
-=======
                 $questionAnswer = SelectOption::find($questionAnswer);
->>>>>>> master
 
                 $is_correct = ($correctAnswer == $questionAnswer->text);
-                
+
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
@@ -186,17 +180,10 @@ class AttendanceController extends Controller
                 ]);
 
                 $is_correct = true;
-<<<<<<< HEAD
-                foreach ($questionAnswer as $leftVal => $rightVal) {
-                    $leftVal = LeftPairOption::find($leftVal)->text;
-                    $rightVal = RightPairOption::find($rightVal)->text;
-                    
-=======
                 foreach ($questionAnswer as $leftId => $rightId) {
                     $leftVal = LeftPairOption::find($leftId)->text;
                     $rightVal = RightPairOption::find($rightId)->text;
 
->>>>>>> master
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
                         'question_id'   => $question->id,
@@ -245,7 +232,7 @@ class AttendanceController extends Controller
                     ]);
                 }
             } else if ($questionType == "Napísanie matematického výrazu") {
-                if ( !isset($questionAnswer->file) ) {
+                if (!isset($questionAnswer->file)) {
                     Answer::create([
                         'attendance_id'     => $attendance->id,
                         'question_id'       => $question->id,
@@ -268,7 +255,7 @@ class AttendanceController extends Controller
                 }
             }
         }
-        
+
         return redirect()->route('home');
     }
 
@@ -281,5 +268,30 @@ class AttendanceController extends Controller
     public function destroy(Attendance $attendance)
     {
         //
+    }
+
+    /**
+     * Exports exam into pdf
+     */
+    public function exportPdf(Exam $exam, Attendance $attendance)
+    {
+        $answers = Answer::where('attendance_id', $attendance->id)->get();
+
+        $pairAnswer = [];
+        foreach ($answers as $answer) {
+            if ($answer->questionType->type_id == 3) {
+                $pairAnswer[] = PairAnswer::where('answer_id', $answer->id)->get();
+            }
+        }
+
+        // share data to view
+        $pdf = PDF::loadView("attendances.show_pdf",  [
+            'exam'          => $exam,
+            'attendance'    => $attendance,
+            'answers'       => $answers,
+            'pairAnswer'    => $pairAnswer
+        ]);
+
+        return $pdf->download("test.pdf");
     }
 }
