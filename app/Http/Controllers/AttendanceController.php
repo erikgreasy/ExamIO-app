@@ -186,7 +186,7 @@ class AttendanceController extends Controller
                     'is_correct'        => true,
                 ]);
 
-                $is_correct = true;
+                $is_correct = true;$pairCorrect = true;
                 foreach ($questionAnswer as $leftId => $rightId) {
                     $leftVal = LeftPairOption::find($leftId)->text;
                     $rightVal = RightPairOption::find($rightId)->text;
@@ -194,6 +194,7 @@ class AttendanceController extends Controller
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
                         'question_id'   => $question->id,
+                        'is_correct'    => $is_correct
                     ]);
 
                     LeftPairOption::create([
@@ -209,9 +210,16 @@ class AttendanceController extends Controller
 
                     if (!($leftId == $rightId)) {
                         $is_correct = false;
+                        $pairCorrect = false;
                     }
+                    else{
+                        $pairCorrect = true;
+                    }
+                    $pairAnswer->is_correct = $pairCorrect;
+                    $pairAnswer->save();
+                    
                 }
-
+                //dd($pairAnswer);
                 $answer->is_correct = $is_correct;
                 $answer->save();
             } else if ($questionType == "Nakreslenie obrázku") {
