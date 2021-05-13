@@ -165,16 +165,17 @@ class AttendanceController extends Controller
                 ]);
             } else if ($questionType == "Výber odpovede") {
                 $correctAnswer = SelectOption::where('question_id', $question->id)->where('is_correct', true)->get()->first()->text;
-                $questionAnswer = SelectOption::find($questionAnswer)->id;
+                $questionAnswer = SelectOption::find($questionAnswer);
 
-                $is_correct = ($correctAnswer == $questionAnswer);
-
+                $is_correct = ($correctAnswer == $questionAnswer->text);
+                
+                dd($is_correct);
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
                     'text'              => null,
                     'img_path'          => null,
-                    'select_option_id'  => $questionAnswer,
+                    'select_option_id'  => $questionAnswer->id,
                     'is_correct'        => $is_correct,
                 ]);
             } else if ($questionType == "Párovanie odpovedí") {
@@ -188,9 +189,10 @@ class AttendanceController extends Controller
                 ]);
 
                 $is_correct = true;
-                foreach ($questionAnswer as $leftVal => $rightVal) {
-                    $leftVal = LeftPairOption::find($leftVal)->text;
-                    $rightVal = RightPairOption::find($rightVal)->text;
+                foreach ($questionAnswer as $leftId => $rightId) {
+                    $leftVal = LeftPairOption::find($leftId)->text;
+                    $rightVal = RightPairOption::find($rightId)->text;
+
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
                         'question_id'   => $question->id,
@@ -207,10 +209,11 @@ class AttendanceController extends Controller
                         'question_id'   => $question->id
                     ]);
 
-                    if (!($leftVal == $rightVal)) {
+                    if (!($leftId == $rightId)) {
                         $is_correct = false;
                     }
                 }
+
                 $answer->is_correct = $is_correct;
                 $answer->save();
             } else if ($questionType == "Nakreslenie obrázku") {
