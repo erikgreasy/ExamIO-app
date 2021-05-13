@@ -85,11 +85,30 @@ class AttendanceController extends Controller
             return abort(404);
 
         $answers = Answer::where('attendance_id', $attendance->id)->get();
+        
 
+
+
+
+
+        $pairAnswer = [];
+        foreach($answers as $answer){
+            if($answer->questionType->type_id == 3){
+    
+                //$pairAnswer[] = $answers->pairAnswers;
+                $pairAnswer[] = PairAnswer::where('answer_id',$answer->id)->get()->first();
+                //dd($answer->pairAnswers->first());
+            }
+           
+        }
+        
+
+        //dd($pairAnswer);
         return view('attendances.show', [
             'exam'          => $exam,
             'attendance'    => $attendance,
-            'answers'       => $answers
+            'answers'       => $answers,
+            'pairAnswer'    => $pairAnswer
         ]);
     }
 
@@ -190,7 +209,6 @@ class AttendanceController extends Controller
                         $is_correct = false;
                     }
                 }
-
                 $answer->is_correct = $is_correct;
                 $answer->save();
             } else if ($questionType == "Nakreslenie obrázku") {
@@ -241,7 +259,7 @@ class AttendanceController extends Controller
                 }
             }
         }
-
+        
         return redirect()->route('home');
     }
 

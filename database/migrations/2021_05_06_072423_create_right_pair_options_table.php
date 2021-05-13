@@ -17,6 +17,7 @@ class CreateRightPairOptionsTable extends Migration
             $table->id();
             $table->string('text');
             $table->foreignId('question_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->boolean('is_original')->default(false);
         });
     }
 

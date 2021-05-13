@@ -51,4 +51,16 @@ class Answer extends Model
     {
         return $this->belongsTo(SelectOption::class);
     }
+
+   /**
+     * Get all of the answers for the Attendance
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pairAnswers(): HasMany
+    {
+        return $this->hasMany(PairAnswer::class);
+    }
+
+
 }
