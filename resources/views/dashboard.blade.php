@@ -53,7 +53,11 @@
             <hr>
         @endforeach
     </div>
-    <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 my-5 px-4 rounded" href="{{ route('exams.create') }}">Vytvorit novy test</a><br>
+    <div class="flex gap-2">
+        <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 my-5 px-4 rounded" href="{{ route('exams.create') }}">Vytvorit novy test</a><br>
+        <a class="bg-yellow-400 hover:bg-yellow-200 text-white font-bold py-2 my-5 px-4 rounded" href="{{ route('exams.watch') }}" target="_blank">Sledovať testy</a>
+    </div>
+
 </div>
 
 @endsection
