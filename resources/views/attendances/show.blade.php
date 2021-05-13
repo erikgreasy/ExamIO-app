@@ -62,7 +62,7 @@
                                             
                                             @foreach($pairAnswer[$index] as $pAnswer)
                                                 <div class="text-lg ml-5 w-1/3"> {{ $pAnswer->leftPairOption->text ." ". $pAnswer->rightPairOption->text }}</div>
-                                                <p><?php echo $index;?></p>
+                                                
                                                 
                                             @endforeach
                                             <?php $index++;?>
