@@ -52,8 +52,9 @@
             @endforeach
         </div>
         <hr>
-
-        <a href="{{ route('exams.questions.create', $exam) }}" class="max-w-xs my-4 bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Pridať novú otázku</a>
+        <div class="mt-8">
+            <a href="{{ route('exams.questions.create', $exam) }}" class="max-w-xs bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Pridať novú otázku</a>
+        </div>
         {{-- <button type="button" id="add_question_to_test" class="max-w-xs my-4 bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Pridať novú otázku</button> --}}
 
         </div>

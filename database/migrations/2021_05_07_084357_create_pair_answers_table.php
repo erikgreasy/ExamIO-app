@@ -18,6 +18,7 @@ class CreatePairAnswersTable extends Migration
             $table->foreignId('answer_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('question_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
+            $table->boolean('is_correct')->default(false);
         });
     }
 

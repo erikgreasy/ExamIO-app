@@ -211,6 +211,7 @@
         </div>
     </footer>
 
+{{--    <a href="https://www.vecteezy.com/free-vector/toggle">Toggle Vectors by Vecteezy</a>--}}
     <!-- <a href='https://www.freepik.com/vectors/banner'>Banner vector created by upklyak - www.freepik.com</a> -->
     <!-- <a href='https://www.freepik.com/vectors/education'>Education vector created by stories - www.freepik.com</a> -->
     <script src="https://premium-tailwindcomponents.netlify.app/assets/build/js/main.js?id=8c11b7cf78ebea1b5aed"></script>
