@@ -7,19 +7,18 @@
                 {{ $exam->title }} </h1><br>
             <b>Kod testu:</b> {{ $exam->exam_code }} <br>
             <b><p id="timer"></p></b>
-            
             <hr>
-            <input type="hidden" value="{{$exam->time_limit}}" id="fullTime">
+            
             <?php
             
-            //Datetime $now = Date.time now;{{ $exam->time_limit }} <br>S
-           /* echo date('H:i:s');
+            
+            echo date('s');
             $time = explode(" ",$attendance->started_at);
 
             
-            echo "<br>" .$time[1];*/
+            echo "<br>" .$time[1];
             ?>
-
+            <input type="hidden" value="{{$exam->time_limit}}" id="fullTime">
 
             <div class="mb-3 pt-0 my-2">
                 {{ $exam->description }}

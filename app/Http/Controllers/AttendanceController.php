@@ -74,8 +74,6 @@ class AttendanceController extends Controller
             $attendance = Attendance::create($data);
         }
 
-        $attendance = Attendance::create($data);
-
         return view('exams.show', [
             'exam'  => $exam,
             'attendance'    => $attendance
