@@ -67,41 +67,39 @@ class AttendanceController extends Controller
         $data['active'] = true;
         
         $exam_limit = $exam->time_limit * 60;
-
+        
         $att = Attendance::where('ais_id',$data['ais_id'])->where('exam_id',$exam->id)->get()->first();
         if($att){
             $attendance = $att;
 
             $startedDate = strtotime($attendance->started_at);
             $startedDate2 = strtotime($data['started_at']);
-
+            
             $diff = abs($startedDate2 - $startedDate); 
             $years = floor($diff / (365*60*60*24));
             $months = floor(($diff - $years * 365*60*60*24)/ (30*60*60*24)); 
             $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
             $hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24)/ (60*60)); 
-            $minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60); 
-            $seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24- $hours*60*60 - $minutes*60)); 
-           
+            $minutes = ($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60; 
+            
             if($minutes > $exam->time_limit){
                 return view('exams.notfound', ['error_message' => "Váš časový limit na test už uplynul."]);
             }
-            else if ($seconds < $exam->time_limit*60){
-                $exam_limit = $seconds;
+            $combinedTime = $exam->time_limit*60 - ($minutes * 60 );
+            
+            if ($combinedTime < $exam_limit){
+                $exam_limit = intval($combinedTime);
             }
 
         }
         else{
             $attendance = Attendance::create($data);
         }
-
-        
-        
         
         return view('exams.show', [
             'exam'  => $exam,
             'attendance'    => $attendance,
-            'exam_limit' => intval($exam_limit)
+            'exam_limit' => $exam_limit
         ]);
     }
 

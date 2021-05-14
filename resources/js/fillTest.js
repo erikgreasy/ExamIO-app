@@ -36,7 +36,10 @@ $(document).ready(function () {
         seconds = fulltime % 60;
         if(seconds<10)seconds = "0"+seconds;
         document.getElementById("timer").innerHTML ="Zostávajúci čas: " +minutes+" : "+seconds;
-        fulltime--;  
+        if(fulltime == 0){
+            clearInterval(interval);
+        }  
+        fulltime--;
     },1000);
     
     
