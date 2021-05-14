@@ -59,12 +59,20 @@ class AttendanceController extends Controller
         $data = $request->validate([
             'first_name'  => 'required|string',
             'last_name'   => 'required|string',
-            'ais_id'      => "required|unique:attendances,ais_id,NULL,id,exam_id,$exam->id",
+            'ais_id'      => "required",
         ]);
 
         $data['exam_id'] = $exam->id;
         $data['started_at'] = now();
         $data['active'] = true;
+
+        $att = Attendance::where('ais_id',$data['ais_id'])->where('exam_id',$exam->id)->get()->first();
+        if($att){
+            $attendance = $att;
+        }
+        else{
+            $attendance = Attendance::create($data);
+        }
 
         $attendance = Attendance::create($data);
 
