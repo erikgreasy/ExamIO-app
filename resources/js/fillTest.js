@@ -30,7 +30,7 @@ $(document).ready(function () {
     }
 
     var fulltime = document.getElementById('fullTime').value;
-    fulltime = fulltime * 60;
+    fulltime = fulltime;
     interval = setInterval(function(){
         minutes = (fulltime - (fulltime % 60)) / 60;
         seconds = fulltime % 60;
