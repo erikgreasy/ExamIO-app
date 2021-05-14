@@ -65,7 +65,7 @@
                                         </div>
 
                                         <div>
-                                            @foreach ($question->rightPairOptions as $roption)
+                                            @foreach ($question->rightPairOptions->shuffle() as $roption)
                                                 <span id="r{{ $roption->id }}" class="drag">
                                                     {{ $roption->text }}
                                                 </span>
