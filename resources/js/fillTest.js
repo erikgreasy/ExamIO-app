@@ -38,6 +38,7 @@ $(document).ready(function () {
         document.getElementById("timer").innerHTML ="Zostávajúci čas: " +minutes+" : "+seconds;
         if(fulltime == 0){
             clearInterval(interval);
+            document.getElementById("timer").innerHTML ="Zostávajúci čas: 00 : 00";
         }  
         fulltime--;
     },1000);

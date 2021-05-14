@@ -83,6 +83,8 @@ class AttendanceController extends Controller
             $minutes = ($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60; 
             
             if($minutes > $exam->time_limit){
+                $attendance->active = false;
+                $attendance->save();
                 return view('exams.notfound', ['error_message' => "Váš časový limit na test už uplynul."]);
             }
             $combinedTime = $exam->time_limit*60 - ($minutes * 60 );
