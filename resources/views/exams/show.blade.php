@@ -1,14 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="py-10 px-6">
+    <section class="py-10 px-6 bg-custom-blue_dark">
         <div class="max-w-7xl px-6 py-16 mx-auto bg-gray-100 mt-10">
             <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight my-4 text-center uppercase">Test:
                 {{ $exam->title }} </h1><br>
-            <b>Kod testu:</b> {{ $exam->code }} <br>
-            <b>limit:</b> {{ $exam->time_limit }} <br>
-            <p id="timer"></p>
+            <b>Kod testu:</b> {{ $exam->exam_code }} <br>
+            <b><p id="timer"></p></b>
+            
             <hr>
+            <input type="hidden" value="{{$exam->time_limit}}" id="fullTime">
+            <?php
+            
+            //Datetime $now = Date.time now;{{ $exam->time_limit }} <br>S
+           /* echo date('H:i:s');
+            $time = explode(" ",$attendance->started_at);
+
+            
+            echo "<br>" .$time[1];*/
+            ?>
 
 
             <div class="mb-3 pt-0 my-2">
@@ -45,12 +55,12 @@
                                 @break
                                 @case('Párovanie odpovedí')
                                     ({{ 'Párovanie odpovedí' }})
-                                    <div class="grid grid-cols-2 gap-4 my-2 mx-2">
+                                    <div class="grid grid-cols-2 gap-4">
                                         <div>
                                             <div class="grid grid-cols-2 gap-1">
                                                 @foreach ($question->leftPairOptions as $loption)
                                                     <div>
-                                                        <p id="{{ $loption->id }}" class="font-bold">
+                                                        <p id="{{ $loption->id }}">
                                                             {{ $loption->text }}
                                                         </p>
                                                     </div>
@@ -65,8 +75,8 @@
                                         </div>
 
                                         <div>
-                                            @foreach ($question->rightPairOptions as $roption)
-                                                <span id="r{{ $roption->id }}" class="drag font-bold px-2">
+                                            @foreach ($question->rightPairOptions->shuffle() as $roption)
+                                                <span id="r{{ $roption->id }}" class="drag">
                                                     {{ $roption->text }}
                                                 </span>
                                                 <br>
@@ -167,9 +177,9 @@
         function sendNotification() {
             fetch('/exams/' + examId + '/attendance/' + attendanceId)
         }
-
+        
         document.addEventListener("visibilitychange", onVisibilityChange);
-
+        
     </script>
-
+    
 @endsection

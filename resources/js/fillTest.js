@@ -29,13 +29,23 @@ $(document).ready(function () {
         sketchs.push(s)
     }
 
-    var seconds = 0;
+    var fulltime = document.getElementById('fullTime').value;
+    fulltime = fulltime * 60;
     interval = setInterval(function(){
+        minutes = (fulltime - (fulltime % 60)) / 60;
+        seconds = fulltime % 60;
+        if(seconds<10)seconds = "0"+seconds;
+        document.getElementById("timer").innerHTML ="Zostávajúci čas: " +minutes+" : "+seconds;
+        fulltime--;  
+    },1000);
+    
+    
+    /*interval = setInterval(function(){
         document.getElementById("timer").innerHTML =seconds + " seconds";
         seconds++;  
     },1000);
     document.getElementById('timer').innerHTML = "uhorky";
-    console.log("axaxa");
+    */
     
     
  });

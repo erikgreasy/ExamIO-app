@@ -15,7 +15,7 @@
     <div class="max-w-7xl h-full px-6 py-16 mx-auto bg-gray-100 mt-10">
         <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight mt-3 text-center uppercase"> Účasť na teste: </h1><br>
 {{--        <h3 class="font-roboto-slab font-bold text-lg leading-tight my-2 text-center uppercase">Kód testu: <span class="text-custom-pink underline text-3xl sm:text-4xl">{{ $exam->exam_code }}</span> </h3><br>--}}
-    
+
     <ul>
         <?php $pos = 1; ?>
         @foreach($exam->attendances as $attendance)
