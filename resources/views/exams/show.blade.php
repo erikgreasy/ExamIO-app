@@ -5,10 +5,20 @@
         <div class="max-w-7xl px-6 py-16 mx-auto bg-gray-100 mt-10">
             <h1 class="font-roboto-slab font-bold text-3xl sm:text-4xl leading-tight my-4 text-center uppercase">Test:
                 {{ $exam->title }} </h1><br>
-            <b>Kod testu:</b> {{ $exam->code }} <br>
-            <b>limit:</b> {{ $exam->time_limit }} <br>
-            <p id="timer"></p>
+            <b>Kod testu:</b> {{ $exam->exam_code }} <br>
+            <b><p id="timer"></p></b>
+            
             <hr>
+            <input type="hidden" value="{{$exam->time_limit}}" id="fullTime">
+            <?php
+            
+            //Datetime $now = Date.time now;{{ $exam->time_limit }} <br>S
+           /* echo date('H:i:s');
+            $time = explode(" ",$attendance->started_at);
+
+            
+            echo "<br>" .$time[1];*/
+            ?>
 
 
             <div class="mb-3 pt-0 my-2">
