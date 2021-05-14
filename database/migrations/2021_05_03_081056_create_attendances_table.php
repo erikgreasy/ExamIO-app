@@ -23,6 +23,7 @@ class CreateAttendancesTable extends Migration
             $table->string('ais_id');
             $table->integer('points')->default(0);
             $table->timestamps();
+            $table->unique(['exam_id', 'ais_id']);
         });
     }
 

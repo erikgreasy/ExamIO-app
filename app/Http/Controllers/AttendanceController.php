@@ -58,8 +58,8 @@ class AttendanceController extends Controller
     {
         $data = $request->validate([
             'first_name'  => 'required|string',
-            'last_name'     => 'required|string',
-            'ais_id'        => 'required'
+            'last_name'   => 'required|string',
+            'ais_id'      => "required|unique:attendances,ais_id,NULL,id,exam_id,$exam->id",
         ]);
 
         $data['exam_id'] = $exam->id;
