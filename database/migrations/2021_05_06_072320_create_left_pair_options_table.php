@@ -15,7 +15,7 @@ class CreateLeftPairOptionsTable extends Migration
     {
         Schema::create('left_pair_options', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
+            $table->string('text')->nullable();
             $table->foreignId('question_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('is_original')->default(false);
         });

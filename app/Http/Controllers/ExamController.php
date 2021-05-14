@@ -80,7 +80,7 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        return view( 'exams.edit', [
+        return view('exams.edit', [
             'exam'  => $exam
         ]);
     }
@@ -108,14 +108,14 @@ class ExamController extends Controller
     public function destroy(Exam $exam)
     {
         Exam::destroy($exam->id);
-//        return redirect()->route('dashboard');
+        //        return redirect()->route('dashboard');
     }
-
 
     /**
      * Exports exam into csv
      */
-    public function exportCsv(Exam $exam) {
+    public function exportCsv(Exam $exam)
+    {
         $fileName = $exam->exam_code . '.csv';
 
         $headers = array(
@@ -131,7 +131,7 @@ class ExamController extends Controller
 
 
 
-        $callback = function() use($attendances, $columns) {
+        $callback = function () use ($attendances, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 
@@ -155,23 +155,23 @@ class ExamController extends Controller
         };
 
         return response()->stream($callback, 200, $headers);
-
     }
 
 
-    public function watch() {
+    public function watch()
+    {
         return view('exams.watch');
     }
 
-    public function getActiveExams( User $user ) {
+    public function getActiveExams(User $user)
+    {
         return response()->json($user->exams);
     }
 
 
-    public function fireEvent(Exam $exam, Attendance $attendance) {
-        
+    public function fireEvent(Exam $exam, Attendance $attendance)
+    {
+
         event(new ExamWindowLeft($exam, $attendance));
-
     }
-
 }

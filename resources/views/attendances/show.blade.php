@@ -20,18 +20,18 @@
                                         <div class="text-lg ml-5 w-1/2">{{$answer->text}}</div>
                                             <div class="text-right -mt-7 p-0 m-0">
                                                 @if ($answer->is_correct)
-                                                    <div class="text-black">
-                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                    <div class="text-green-500 font-semibold">
+                                                        Správna odpoveď
                                                     </div>
                                                     <?php $fullPoints++; ?>
                                                 @else
-                                                    <div class="text-black">
-                                                        <p class=" text-red-500 font-semibold">Nesprávna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                    <div class="text-red-500 font-semibold">
+                                                        Nesprávna odpoveď
                                                     </div>
                                                     <?php $fullPoints++; ?>
                                                 @endif
+                                                <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                
                                             </div>
                                         
                                     @break
@@ -41,18 +41,17 @@
                                         <div class="text-lg ml-5 w-1/3">{{$answer->selectOption->text}}</div>
                                             <div class="text-right -mt-7 p-0 m-0">
                                                 @if ($answer->is_correct)
-                                                    <div class="text-black">
-                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                    <div class="text-green-500 font-semibold">
+                                                       Správna odpoveď
                                                     </div>
                                                     <?php  $fullPoints++; ?>
                                                 @else
-                                                    <div class="text-black">
-                                                        <p class=" text-red-500 font-semibold">Nesprávna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                    <div class="text-red-500 font-semibold">
+                                                        Nesprávna odpoveď
                                                         <?php $fullPoints++; ?>
                                                     </div>
                                                 @endif
+                                                <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
                                             </div>
                                         
                                     @break
@@ -73,18 +72,17 @@
                                         
                                             <div class="text-right -mt-7 p-0 m-0">
                                                 @if ($answer->is_correct)
-                                                    <div class="text-black">
-                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                    <div class="text-green-500 font-semibold">
+                                                        Správna odpoveď
                                                     </div>
                                                     <?php  $fullPoints++; ?>
                                                 @else
-                                                    <div class="text-black">
-                                                        <p class=" text-red-500 font-semibold">Nesprávna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                    <div class="text-red-500 font-semibold">
+                                                        Nesprávna odpoveď
                                                         <?php $fullPoints++; ?>
                                                     </div>
                                                 @endif
+                                                <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
                                             </div>
                                         
                                     @break
@@ -94,18 +92,17 @@
                                         <div class="text-lg ml-5 w-1/3"><img src="{{$answer->canvas}}"></div>
                                             <div class="text-right -mt-7 p-0 m-0">
                                                 @if ($answer->is_correct)
-                                                    <div class="text-black">
-                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                    <div class="text-green-500 font-semibold">
+                                                        Správna odpoveď                                                  
                                                     </div>
                                                     <?php  $fullPoints++; ?>
                                                 @else
-                                                    <div class="text-black">
-                                                        <p class=" text-red-500 font-semibold">Nesprávna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                    <div class=" text-red-500 font-semibold">
+                                                        Nesprávna odpoveď                                                 
                                                         <?php $fullPoints++; ?>
                                                     </div>
-                                                @endif
+                                                @endif 
+                                                <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
                                             </div>
                                         
                                     @break
@@ -116,17 +113,16 @@
                                             <div class="text-right -mt-7 p-0 m-0">
                                                 @if ($answer->is_correct)
                                                     <div class="text-black">
-                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
+                                                        <p class=" text-green-500 font-semibold">Správna odpoveď</p>              
                                                     </div>
                                                     <?php $fullPoints++; ?>
                                                 @else
                                                     <div class="text-black">
                                                         <p class=" text-red-500 font-semibold">Nesprávna odpoveď</p>
-                                                        <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
                                                         <?php $fullPoints++; ?>
                                                     </div>
                                                 @endif
+                                                <a href="{{ route('correction', [$answer,$attendance]) }}">Zmeniť hodnotenie.</a>
                                             </div>
                                         
                                     @break
@@ -139,7 +135,7 @@
                     <?php $pos++; ?>
                 @endforeach
 
-                <div class="text-2xl font-semibold">Počet bodov: {{$attendance->points}}<?php echo "/".$fullPoints; ?><br>{{$attendance->points}}</div>
+                <div class="text-2xl font-semibold">Počet bodov: {{$attendance->points}}<?php echo "/".$fullPoints; ?></div>
 
             </div>
     </div>

@@ -30,9 +30,9 @@
         @foreach ($exams as $exam)
             <div class="m-5 flex flex-col">
                 <div class="grid grid-cols-6 gap-4">
-                    <div class="col-span-5"><b>Test:</b>
+                    <div class="col-span-5">
                         <span class="font-roboto-slab font-bold text-2xl sm:text-2xl leading-tight pb-5">
-                            {{ $exam->title }}
+                            {{ $exam->title }}  - <span class="text-red-500 underline">{{ $exam->exam_code }}</span>
                         </span>
                     </div>
                     <div class="w-full">

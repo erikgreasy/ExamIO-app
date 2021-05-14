@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\LeftPairOption;
 use App\Models\RightPairOption;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class AttendanceController extends Controller
 {
@@ -82,23 +83,19 @@ class AttendanceController extends Controller
     public function show(Exam $exam, Attendance $attendance)
     {
         if ($attendance->active)
-            return abort(404);
+            return view('attendances.index', [
+                'exam'   => $exam
+            ]);
 
         $answers = Answer::where('attendance_id', $attendance->id)->get();
         
         $pairAnswer = [];
-        foreach($answers as $answer){
-            if($answer->questionType->type_id == 3){
-    
-                //$pairAnswer[] = $answers->pairAnswers;
-                $pairAnswer[] = PairAnswer::where('answer_id',$answer->id)->get();
-                //dd($answer->pairAnswers->first());
+        foreach ($answers as $answer) {
+            if ($answer->questionType->type_id == 3) {
+                $pairAnswer[] = PairAnswer::where('answer_id', $answer->id)->get();
             }
-           
         }
-        
 
-        //dd($pairAnswer);
         return view('attendances.show', [
             'exam'          => $exam,
             'attendance'    => $attendance,
@@ -149,7 +146,6 @@ class AttendanceController extends Controller
         ]);
 
         Attendance::where('id', $attendance->id)->update(['active' => false]);
-        //$att = Attendance::where('id', $attendance->id)->get()->first();
         
         $points = $attendance->points;
 
@@ -160,7 +156,7 @@ class AttendanceController extends Controller
             if ($questionType == "Krátka odpoveď") {
                 $correctAnswer = Answer::where('question_id', $question->id)->where('attendance_id', NULL)->get()->first()->text;
                 $is_correct = ($correctAnswer == $questionAnswer);
-                if($is_correct)$points++;
+                if($is_correct) $points++;
                 Answer::create([
                     'attendance_id'     => $attendance->id,
                     'question_id'       => $question->id,
@@ -193,10 +189,11 @@ class AttendanceController extends Controller
                     'is_correct'        => true,
                 ]);
 
-                $is_correct = true;$pairCorrect = true;
+                $is_correct = true;
+                $pairCorrect = true;
                 foreach ($questionAnswer as $leftId => $rightId) {
                     $leftVal = LeftPairOption::find($leftId)->text;
-                    $rightVal = RightPairOption::find($rightId)->text;
+                    $rightVal = ($rightId != null) ? RightPairOption::find($rightId)->text : null;
 
                     $pairAnswer = PairAnswer::create([
                         'answer_id'     => $answer->id,
@@ -206,12 +203,12 @@ class AttendanceController extends Controller
 
                     LeftPairOption::create([
                         'text'          => $leftVal,
-                        'pair_answer_id' => $pairAnswer->id,
+                        'pair_answer_id'=> $pairAnswer->id,
                         'question_id'   => $question->id
                     ]);
                     RightPairOption::create([
                         'text'          => $rightVal,
-                        'pair_answer_id' => $pairAnswer->id,
+                        'pair_answer_id'=> $pairAnswer->id,
                         'question_id'   => $question->id
                     ]);
 
@@ -226,8 +223,7 @@ class AttendanceController extends Controller
                     $pairAnswer->save();
                     
                 }
-                //dd($pairAnswer);
-                if($is_correct)$points++;
+                if($is_correct) $points++;
                 $answer->is_correct = $is_correct;
                 $answer->save();
             } else if ($questionType == "Nakreslenie obrázku") {
@@ -255,7 +251,7 @@ class AttendanceController extends Controller
                     ]);
                 }
             } else if ($questionType == "Napísanie matematického výrazu") {
-                if ( !isset($questionAnswer->file) ) {
+                if (!isset($questionAnswer->file)) {
                     Answer::create([
                         'attendance_id'     => $attendance->id,
                         'question_id'       => $question->id,
@@ -292,5 +288,30 @@ class AttendanceController extends Controller
     public function destroy(Attendance $attendance)
     {
         //
+    }
+
+    /**
+     * Exports exam into pdf
+     */
+    public function exportPdf(Exam $exam, Attendance $attendance)
+    {
+        $answers = Answer::where('attendance_id', $attendance->id)->get();
+
+        $pairAnswer = [];
+        foreach ($answers as $answer) {
+            if ($answer->questionType->type_id == 3) {
+                $pairAnswer[] = PairAnswer::where('answer_id', $answer->id)->get();
+            }
+        }
+
+        // share data to view
+        $pdf = PDF::loadView("attendances.show_pdf",  [
+            'exam'          => $exam,
+            'attendance'    => $attendance,
+            'answers'       => $answers,
+            'pairAnswer'    => $pairAnswer
+        ]);
+
+        return $pdf->download("test.pdf");
     }
 }
