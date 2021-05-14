@@ -55,7 +55,7 @@
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Registrácia</a>
                             @endif
-                            <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Kontakt</a>
+                            <a href="{{ route('docs') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Docs</a>
                         @endauth
                 @endif
 
@@ -102,7 +102,7 @@
                         @endif
                     @endauth
             @endif
-            <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Kontakt</a>
+            <a href="{{ route('docs') }}" class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Docs</a>
         </div>
     </nav>
 </header>

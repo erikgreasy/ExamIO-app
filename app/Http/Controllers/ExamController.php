@@ -63,7 +63,7 @@ class ExamController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Exam  $exam
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsenew
      */
     public function show(Exam $exam)
     {
