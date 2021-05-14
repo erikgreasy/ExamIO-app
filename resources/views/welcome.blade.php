@@ -92,7 +92,7 @@
                     Vytvorte otázky s možnosťami, spájanie správnych odpovedí, písanie vzorcov a ďalšie.
                 </p>
                 <button class="mx-auto bg-custom-blue hover:bg-custom-kako text-white rounded py-2 px-8 shadow-lg">
-                    Zobraziť viac..
+                    <a href="{{ route('login') }}">Zobraziť viac..</a>
                 </button>
             </div>
         </div>
@@ -143,7 +143,7 @@
                     sú úplne zdarma, no môžte nás podporiť a tým urýchliť vývoj.</p>
                 </div>
 
-                <a class="block px-8 py-2 mt-6 text-lg font-medium text-center text-white transition-colors duration-300 transform bg-custom-blue rounded md:mt-0 hover:bg-custom-kako" href="#">Podporiť</a>
+                <a class="block px-8 py-2 mt-6 text-lg font-medium text-center text-white transition-colors duration-300 transform bg-custom-blue rounded md:mt-0 hover:bg-custom-kako" href="https://www.meme-arsenal.com/memes/86f81185b21b5562d8e3514e2903e34f.jpg" target="_blank">Podporiť</a>
             </div>
         </div>
     </section><hr class="max-w-7xl mx-auto">
@@ -198,23 +198,22 @@
                     <h4 class="text-2xl text-white leading-tight text-center sm:text-left">Webová aplikácia www.Exam.io <br class="hidden sm:block"> Projekt pre predmet <span class="font-bold underline">Webové technológie 2</span></h4>
                 </div>
                 <div class="sm:w-1/3 mt-12 sm:mt-0 flex justify-end">
-                    <button class="bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">Kontaktujte nás</button>
+                    <button class="bg-custom-blue hover:bg-custom-blue_dark text-white rounded py-3 px-8 shadow-lg font-medium text-lg">
+                        <a href="https://www.meme-arsenal.com/memes/86f81185b21b5562d8e3514e2903e34f.jpg" target="_blank">Kontaktujte nás</a>
+                    </button>
                 </div>
             </div>
             <div class="flex justify-center sm:justify-end border-t border-gray-700 py-10 mt-16">
                 <a href="#" class="text-white mx-2">Domov</a>
-                <a href="#" class="text-white mx-2">Prihlásenie</a>
-                <a href="#" class="text-white mx-2">Registrácia</a>
-                <a href="#" class="text-white mx-2">Moje testy</a>
-                <a href="#" class="text-white mx-2">Rozdelenie úloh </a>
-                <a href="#" class="text-white mx-2">Zdroje</a>
+                <a href="{{ route('login') }}" class="text-white mx-2">Prihlásenie</a>
+                <a href="{{ route('register') }}" class="text-white mx-2">Registrácia</a>
+                <a href="{{ route('docs') }}" class="text-white mx-2">Dokumentácia</a>
+                <a href="https://trello.com/b/UCnpV0WL/webtech2final" target="_blank" class="text-white mx-2">Rozdelenie úloh</a>
+                <a href="{{ route('resources') }}" class="text-white mx-2">Zdroje</a>
             </div>
         </div>
     </footer>
 
-{{--    <a href="https://www.vecteezy.com/free-vector/toggle">Toggle Vectors by Vecteezy</a>--}}
-    <!-- <a href='https://www.freepik.com/vectors/banner'>Banner vector created by upklyak - www.freepik.com</a> -->
-    <!-- <a href='https://www.freepik.com/vectors/education'>Education vector created by stories - www.freepik.com</a> -->
     <script src="https://premium-tailwindcomponents.netlify.app/assets/build/js/main.js?id=8c11b7cf78ebea1b5aed"></script>
 </body>
 </html>
