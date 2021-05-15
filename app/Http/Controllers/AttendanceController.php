@@ -87,6 +87,9 @@ class AttendanceController extends Controller
                 $attendance->save();
                 return view('exams.notfound', ['error_message' => "Váš časový limit na test už uplynul."]);
             }
+            else if(!$attendance->active){
+                return view('exams.notfound', ['error_message' => "Váš test už bol odovzdaný."]);
+            }
             $combinedTime = $exam->time_limit*60 - ($minutes * 60 );
             
             if ($combinedTime < $exam_limit){
