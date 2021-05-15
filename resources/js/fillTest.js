@@ -45,13 +45,6 @@ $(document).ready(function () {
     },1000);
     
     
-    /*interval = setInterval(function(){
-        document.getElementById("timer").innerHTML =seconds + " seconds";
-        seconds++;  
-    },1000);
-    document.getElementById('timer').innerHTML = "uhorky";
-    */
-    
     
  });
 
