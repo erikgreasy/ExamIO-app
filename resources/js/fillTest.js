@@ -37,6 +37,7 @@ $(document).ready(function () {
         if(seconds<10)seconds = "0"+seconds;
         document.getElementById("timer").innerHTML ="Zostávajúci čas: " +minutes+" : "+seconds;
         if(fulltime == 0){
+            $('form').submit()
             clearInterval(interval);
             document.getElementById("timer").innerHTML ="Zostávajúci čas: 00 : 00";
         }  

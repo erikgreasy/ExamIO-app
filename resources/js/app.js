@@ -17,6 +17,9 @@ import 'jquery-ui/ui/widgets/droppable.js';
 
 require('./fillTest');
 
+
+// Pusher.logToConsole = true;
+
 // pokial mam auth usera tak to znamena ze som na exams.watch blade
 if( window.auth_user ) {
     let exams = [];
