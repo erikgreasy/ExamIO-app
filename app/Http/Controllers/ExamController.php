@@ -139,8 +139,7 @@ class ExamController extends Controller
                 $row['AisID']  = $attendance->ais_id;
                 $row['Meno']    = $attendance->first_name;
                 $row['Priezvisko']    = $attendance->last_name;
-                // TODO - zmenit na implicitne hodnoty
-                $row['Body']    = 20;
+                $row['Body']    = $attendance->points;
 
 
                 fputcsv($file, [
